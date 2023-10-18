@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bruno/bruno.dart';
+import 'package:flutools/pages/projects/projects_page.dart';
 import 'package:flutools/router/app_routers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -7,11 +10,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'i18n/ChineseCupertinoLocalizations.dart';
 import 'i18n/localizations.dart';
 import 'router/app_pages.dart';
-import 'router/pages/404/unknown_route_page.dart';
+import 'pages/404/unknown_route_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +28,23 @@ void realRunApp() async {
   // 初始化get_storage
   await GetStorage.init();
   await windowManager.ensureInitialized();
+
+  final Directory hiveDir = await getApplicationSupportDirectory();
+  // List<String> paths = hiveDir.path.split('/');
+  // paths.removeLast();
+  // final Directory appDir = Directory('${paths.join('/')}/com.fvm.sidekick');
+
+  // const projects_key = 'projects_service_box';
+
+  /// copy sidekick hive db to hiveDir
+  // final File sidekickHiveDb = File('${appDir.path}/$projects_key.hive');
+  // if (!sidekickHiveDb.existsSync()) {
+  //   sidekickHiveDb.copySync('${hiveDir.path}/$projects_key.hive');
+  // }
+
+  Hive.init(hiveDir.absolute.path);
+
+  Hive.registerAdapter(ProjectPathAdapter());
 
   WindowOptions windowOptions = const WindowOptions(
     size: Size(800, 600),
@@ -131,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // 失败使用中文语言
             fallbackLocale: const Locale('zh', 'CH'),
             localizationsDelegates: [
-              // ChineseCupertinoLocalizations.delegate, // 自定义的delegate
+              ChineseCupertinoLocalizations.delegate, // 自定义的delegate
               DefaultCupertinoLocalizations.delegate, // 默认的只支持英文
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

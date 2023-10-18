@@ -45,6 +45,10 @@ dependencies:
   bruno: ^3.2.0
   fvm: ^2.4.1
   window_manager: ^0.3.6
+  file_selector: ^1.0.1
+  hive: ^2.2.3
+  path_provider: ^2.1.0
+  responsive_grid: ^2.4.4
 
 dev_dependencies:
   flutter_test:

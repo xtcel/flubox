@@ -1,7 +1,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'app_routers.dart';
-import 'pages/application/splash_screen_page.dart';
-import 'pages/home/HomePage.dart';
+import '../pages/application/splash_screen_page.dart';
+import '../pages/home/HomePage.dart';
 
 class AppPages {
   /// 通用模块

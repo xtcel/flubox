@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,16 @@ class _HomePageState extends State<HomePage> {
   final PageController _controller = PageController();
   final ValueNotifier<int> _selectIndex = ValueNotifier(0);
   bool extended = false;
+  final kEnvVars = Platform.environment;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print("kEnvVars: $kEnvVars");
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,12 +62,13 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
               child: PageView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
-            children: [
+            children: const [
               ProjectsPage(),
-              const VersionManagerPage(),
-              const VersionManagerPage(),
-              const VersionManagerPage(),
+              VersionManagerPage(),
+              VersionManagerPage(),
+              VersionManagerPage(),
             ],
           )),
         ]));
@@ -105,8 +118,7 @@ class LeftNavigation extends StatelessWidget {
   final List<NavigationRailDestination> destinations = const [
     NavigationRailDestination(
         icon: Icon(Icons.message_outlined), label: Text("项目")),
-    NavigationRailDestination(
-        icon: Icon(Icons.games_sharp), label: Text("工作台")),
+    NavigationRailDestination(icon: Icon(Icons.games_sharp), label: Text("代码")),
     NavigationRailDestination(
         icon: Icon(Icons.calendar_month), label: Text("工具"))
   ];
