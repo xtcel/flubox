@@ -4,6 +4,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 
 import '../projects/projects_page.dart';
+import '../tools/tools_page.dart';
 import '../version_manager/version_manager_page.dart';
 
 /// 首页
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             children: const [
               ProjectsPage(),
               VersionManagerPage(),
-              VersionManagerPage(),
+              ToolsPage(),
               VersionManagerPage(),
             ],
           )),

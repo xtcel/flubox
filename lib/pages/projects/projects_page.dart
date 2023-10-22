@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bruno/bruno.dart';
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:fvm/fvm.dart';
@@ -26,6 +27,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
   late Box<ProjectRef> box;
 
   List<Project> projects = <Project>[];
+  bool _dragging = false;
+  final List<XFile> _dropFileList = [];
 
   @override
   void initState() {
@@ -85,20 +88,37 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 minSpacing: 10,
                 children: projects.map((e) {
                   return SizedBox(
-                    height: 120,
-                    child: BrnShadowCard(
-                        padding: const EdgeInsets.all(20),
-                        color: Colors.white,
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              const Icon(Icons.folder),
-                              Text(e.name ?? ""),
-                            ],
-                          ),
-                        )),
-                  );
+                      height: 120,
+                      child: BrnShadowCard(
+                          padding: const EdgeInsets.all(20),
+                          color: Colors.white,
+                          child: DropTarget(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                children: [
+                                  const Icon(Icons.folder),
+                                  Text(e.name ?? ""),
+                                ],
+                              ),
+                            ),
+                            onDragDone: (detail) {
+                              print("detail: $detail");
+                              setState(() {
+                                _dropFileList.addAll(detail.files);
+                              });
+                            },
+                            onDragEntered: (detail) {
+                              setState(() {
+                                _dragging = true;
+                              });
+                            },
+                            onDragExited: (detail) {
+                              setState(() {
+                                _dragging = false;
+                              });
+                            },
+                          )));
                 }).toList()),
           ),
 
@@ -142,8 +162,9 @@ class _ProjectsPageState extends State<ProjectsPage> {
     if (project.isFlutterProject) {
       final ref = ProjectRef(name: path.split('/').last, path: path);
       box.put(path, ref);
-      // await ProjectsService.box.put(path, ref);
-      // await load();
+
+      // 刷新数据
+      getProjects();
     } else {
       // ignore: use_build_context_synchronously
       BrnToast.show('modules:projects.notAFlutterProject'.tr, context);
