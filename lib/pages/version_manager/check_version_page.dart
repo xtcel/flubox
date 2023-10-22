@@ -71,7 +71,11 @@ class _CheckVersionPageState extends State<CheckVersionPage> {
                           child: Container(),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            // 切换版本
+                            await FVMClient.setGlobalVersion(versions[index]);
+                            getFlutterReleases();
+                          },
                           child: const Text(
                             "切换",
                             style: TextStyle(fontSize: 16),

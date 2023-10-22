@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fvm/fvm.dart';
 
 import 'check_version_page.dart';
+import 'download_version.dart';
 import 'env_config_page.dart';
 
 /// 版本管理页面
@@ -69,37 +70,14 @@ class _VersionManagerState extends State<VersionManagerPage>
           controller: _tabController,
           children: tabs.map((Tab tab) {
             if (tab.text == "环境配置") {
-              return EnvConfigPage();
+              return const EnvConfigPage();
             } else if (tab.text == "版本切换") {
               return const CheckVersionPage();
             } else {
-              return Container(
-                child: const Column(
-                  children: [
-                    Text('版本管理'),
-                  ],
-                ),
-              );
+              return const DownloadVersionWidget();
             }
           }).toList()),
     );
-
-    // Container(
-    //   child: Column(
-    //     children: [
-    //       const Row(
-    //         children: [
-    //           Text('版本切换'),
-    //           Text('版本管理'),
-    //         ],
-    //       ),
-    //       Row(
-    //         children: [Text('global Version: $currentVersion')],
-    //       ),
-    //     ],
-    //   ),
-    // ),
-    // );
   }
 
   Widget _buildTopNavigationBar(int index) {

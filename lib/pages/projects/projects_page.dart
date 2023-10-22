@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:bruno/bruno.dart';
-import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_selector/file_selector.dart';
+import 'package:flutools/router/app_routers.dart';
+import 'package:flutools/router/arguments_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';
@@ -27,13 +28,15 @@ class _ProjectsPageState extends State<ProjectsPage> {
   late Box<ProjectRef> box;
 
   List<Project> projects = <Project>[];
-  bool _dragging = false;
+  final bool _dragging = false;
   final List<XFile> _dropFileList = [];
+  List<CacheVersion> versions = [];
 
   @override
   void initState() {
     // TODO: implement initState
     getProjects();
+    getFlutterReleases();
 
     super.initState();
   }
@@ -45,12 +48,22 @@ class _ProjectsPageState extends State<ProjectsPage> {
     // box.add(project);
     box = await Hive.openBox<ProjectRef>(_key);
     // box.clear();
-    List<Directory> directories =
-        box.values.map((e) => Directory(e.path)).toList();
-    projects = await FVMClient.fetchProjects(directories);
+    try {
+      List<Directory> directories =
+          box.values.map((e) => Directory(e.path)).toList();
+      projects = await FVMClient.fetchProjects(directories);
+      print("box: $box");
+      setState(() {});
+    } catch (e) {}
+  }
 
-    print("box: $box");
-    setState(() {});
+  void getFlutterReleases() async {
+    CacheVersion? globalVersion = await FVMClient.getGlobal();
+    print("global version: $globalVersion");
+    // currentVersion = globalVersion?.name ?? "";
+
+    versions = await FVMClient.getCachedVersions();
+    print("cached versions :$versions");
   }
 
   @override
@@ -84,63 +97,78 @@ class _ProjectsPageState extends State<ProjectsPage> {
           ),
           Expanded(
             child: ResponsiveGridList(
-                desiredItemWidth: 180,
+                desiredItemWidth: 250,
                 minSpacing: 10,
-                children: projects.map((e) {
+                children: projects.map((project) {
+                  final GlobalKey selectedVersionButtonKey = GlobalKey();
+
                   return SizedBox(
-                      height: 120,
-                      child: BrnShadowCard(
-                          padding: const EdgeInsets.all(20),
-                          color: Colors.white,
-                          child: DropTarget(
+                      height: 180,
+                      child: InkWell(
+                        onTap: () {
+                          // 进入项目详情页面
+                          Get.toNamed(Routers.projectDetailPage, arguments: {
+                            ArgumentsKeys.model: project,
+                          });
+                        },
+                        child: BrnShadowCard(
+                            padding: const EdgeInsets.all(20),
+                            color: const Color.fromRGBO(255, 255, 255, 1),
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               child: Column(
                                 children: [
                                   const Icon(Icons.folder),
-                                  Text(e.name ?? ""),
+                                  Text(project.name ?? ""),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextButton.icon(
+                                        key: selectedVersionButtonKey,
+                                        onPressed: () {
+                                          // 选择版本
+                                          BrnPopupListWindow.showPopListWindow(
+                                            context,
+                                            selectedVersionButtonKey,
+                                            data: versions
+                                                .map((version) => version.name)
+                                                .toList(),
+                                            onItemClick: (index, item) {
+                                              // 切换项目版本
+                                              checkVersion(project, item);
+
+                                              return false;
+                                            },
+                                          );
+                                        },
+                                        icon: const Icon(Icons.arrow_drop_down),
+                                        label: Text(
+                                          project.pinnedVersion ?? "选择版本",
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                      )
+                                    ],
+                                  )
                                 ],
                               ),
-                            ),
-                            onDragDone: (detail) {
-                              print("detail: $detail");
-                              setState(() {
-                                _dropFileList.addAll(detail.files);
-                              });
-                            },
-                            onDragEntered: (detail) {
-                              setState(() {
-                                _dragging = true;
-                              });
-                            },
-                            onDragExited: (detail) {
-                              setState(() {
-                                _dragging = false;
-                              });
-                            },
-                          )));
+                            )),
+                      ));
                 }).toList()),
           ),
-
-          //   GridView.builder(
-          //     shrinkWrap: true,
-          //     itemCount: 10,
-          //     gridDelegate:
-          //      const SliverGridDelegateWithFixedCrossAxisCount(
-          //       crossAxisCount: 3,
-          //       mainAxisSpacing: 10,
-          //       crossAxisSpacing: 10,
-          //       childAspectRatio: 5 / 2,
-          //     ),
-          //     itemBuilder: (BuildContext context, int index) {
-
-          //       // return ;
-          //     },
-          //   ),
-          // )
         ],
       ),
     );
+  }
+
+  // 切换项目版本
+  void checkVersion(Project project, String version) async {
+    await FVMClient.pinVersion(project, version);
+    String toast = "${project.name}已切换到version: $version";
+    BrnToast.show(toast, context);
+    // 刷新项目列表数据
+    setState(() {
+      getProjects();
+    });
   }
 
   void onAddProjectButton() async {

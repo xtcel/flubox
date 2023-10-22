@@ -10,4 +10,10 @@ abstract class Routers {
 
   /// 语言设置页面
   static const String languageSettingPage = '/languageSettingPage';
+
+  /// project
+  static const String projectDetailPage = '/projectDetailPage';
+
+  /// 资源管理页面
+  static const String resourceManagerPage = '/resourceManagerPage';
 }

@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -51,6 +51,10 @@ dependencies:
   responsive_grid: ^2.4.4
   # 拖动文件到应用
   desktop_drop: ^0.4.4
+  # 文件解压缩
+  archive: ^3.4.6
+  # 树形结构展示
+  flutter_fancy_tree_view: ^1.4.1
 
 dev_dependencies:
   flutter_test:
