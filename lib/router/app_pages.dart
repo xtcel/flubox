@@ -1,5 +1,5 @@
-import 'package:flutools/pages/projects/project_detial/apps/resource_manager/resource_manager_page.dart';
-import 'package:flutools/pages/projects/project_detial/project_detail_page.dart';
+import 'package:flubox/pages/projects/project_detial/apps/resource_manager/resource_manager_page.dart';
+import 'package:flubox/pages/projects/project_detial/project_detail_page.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'app_routers.dart';
 import '../pages/application/splash_screen_page.dart';

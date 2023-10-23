@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:bruno/bruno.dart';
 import 'package:file_selector/file_selector.dart';
-import 'package:flutools/router/app_routers.dart';
-import 'package:flutools/router/arguments_keys.dart';
+import 'package:flubox/router/app_routers.dart';
+import 'package:flubox/router/arguments_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';

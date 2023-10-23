@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:bruno/bruno.dart';
-import 'package:flutools/pages/projects/projects_page.dart';
-import 'package:flutools/router/app_routers.dart';
+import 'package:flubox/pages/projects/projects_page.dart';
+import 'package:flubox/router/app_routers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

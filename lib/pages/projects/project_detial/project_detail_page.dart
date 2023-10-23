@@ -1,6 +1,6 @@
 /// 项目详情页面
 
-import 'package:flutools/router/app_routers.dart';
+import 'package:flubox/router/app_routers.dart';
 import 'package:flutter/material.dart';
 import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';
