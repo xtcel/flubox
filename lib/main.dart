@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
       splitScreenMode: true,
       builder: (context, widget) {
         return GetMaterialApp(
-            title: 'flutools',
+            title: 'flubox',
             // navigatorKey: rootNavigatorKey,
             // theme: LeLeThemeConfig.defaultTheme,
             // 去掉模拟器调试debug标识
