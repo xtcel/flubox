@@ -47,7 +47,7 @@ void realRunApp() async {
   Hive.registerAdapter(ProjectPathAdapter());
 
   WindowOptions windowOptions = const WindowOptions(
-    size: Size(800, 600),
+    size: Size(1000, 720),
     center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,

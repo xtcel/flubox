@@ -123,30 +123,57 @@ class _ProjectsPageState extends State<ProjectsPage> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      TextButton.icon(
-                                        key: selectedVersionButtonKey,
-                                        onPressed: () {
-                                          // 选择版本
-                                          BrnPopupListWindow.showPopListWindow(
-                                            context,
-                                            selectedVersionButtonKey,
-                                            data: versions
-                                                .map((version) => version.name)
-                                                .toList(),
-                                            onItemClick: (index, item) {
-                                              // 切换项目版本
-                                              checkVersion(project, item);
+                                      // BrnIconButton(
+                                      //     name: '文字在右',
+                                      //     direction: Direction.right,
+                                      //     padding: 4,
+                                      //     iconWidget:
+                                      //         const Icon(Icons.autorenew),
+                                      //     onTap: () {
+                                      //       BrnToast.show('按钮被点击', context);
+                                      //     }),
+                                      ElevatedButton(
+                                          key: selectedVersionButtonKey,
+                                          onPressed: () {
+                                            // 选择版本
+                                            BrnPopupListWindow
+                                                .showPopListWindow(
+                                              context,
+                                              selectedVersionButtonKey,
+                                              data: versions
+                                                  .map(
+                                                      (version) => version.name)
+                                                  .toList(),
+                                              onItemClick: (index, item) {
+                                                // 切换项目版本
+                                                checkVersion(project, item);
 
-                                              return false;
-                                            },
-                                          );
-                                        },
-                                        icon: const Icon(Icons.arrow_drop_down),
-                                        label: Text(
-                                          project.pinnedVersion ?? "选择版本",
-                                          style: const TextStyle(fontSize: 12),
-                                        ),
-                                      )
+                                                return false;
+                                              },
+                                            );
+                                          },
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                project.pinnedVersion ?? "选择版本",
+                                                style: const TextStyle(
+                                                    fontSize: 12),
+                                              ),
+                                              const Icon(Icons.arrow_drop_down),
+                                            ],
+                                          ))
+                                      // TextButton.icon(
+                                      //   key: selectedVersionButtonKey,
+                                      //   onPressed: () {
+
+                                      //   },
+                                      //   icon: const Icon(Icons.arrow_drop_down),
+                                      //   label: Text(
+                                      //     project.pinnedVersion ?? "选择版本",
+                                      //     style: const TextStyle(fontSize: 12),
+                                      //   ),
+                                      // )
                                     ],
                                   )
                                 ],

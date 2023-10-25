@@ -55,6 +55,9 @@ dependencies:
   archive: ^3.4.6
   # 树形结构展示
   flutter_fancy_tree_view: ^1.4.1
+  # 系统托盘
+  system_tray: ^2.0.3
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:

@@ -2,7 +2,10 @@
 
 import 'package:archive/archive_io.dart';
 import 'package:file_selector/file_selector.dart';
+import 'package:flubox/router/arguments_keys.dart';
 import 'package:flutter/material.dart';
+import 'package:fvm/fvm.dart';
+import 'package:get/get.dart';
 
 import 'widgets/add_file_widget.dart';
 import 'widgets/unzip_file_manager_widget.dart';
@@ -17,6 +20,20 @@ class ResourceManagerPage extends StatefulWidget {
 class _ResourceManagerPageState extends State<ResourceManagerPage> {
   bool showAddFile = true;
   XFile? selectedFile;
+  late Project project;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// 获取路由参数
+    Get.arguments?.forEach((key, value) {
+      if (key == ArgumentsKeys.model) {
+        project = value as Project;
+      }
+      debugPrint('key:$key value:$value');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +50,10 @@ class _ResourceManagerPageState extends State<ResourceManagerPage> {
                   });
                 },
               )
-            : UnzipFileManagerWidget(file: selectedFile));
+            : UnzipFileManagerWidget(
+                file: selectedFile,
+                project: project,
+              ));
   }
 
   /// 解压文件

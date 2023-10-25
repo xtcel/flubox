@@ -58,7 +58,8 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
     return [
       InkWell(
         onTap: () {
-          Get.toNamed(Routers.resourceManagerPage);
+          Get.toNamed(Routers.resourceManagerPage,
+              arguments: {ArgumentsKeys.model: project});
         },
         child: Container(
           padding: const EdgeInsets.all(10),
