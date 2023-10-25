@@ -3,6 +3,7 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fancy_tree_view/flutter_fancy_tree_view.dart';
 import 'package:fvm/fvm.dart';
+import 'package:get/get.dart';
 import 'dart:io';
 
 import 'package:path/path.dart';
@@ -39,10 +40,17 @@ class _UnzipFileManagerWidgetState extends State<UnzipFileManagerWidget> {
   String targetFolderName = 'assets/images';
   // 目标文件夹
   String targetFolderPath = 'assets/images';
+  // 目标文件夹名称控制器
+  late TextEditingController renameTextFieldCtrl;
+  String targetFileName = '';
+  late TextEditingController targetFolderPathTextFieldCtrl;
 
   @override
   void initState() {
     super.initState();
+    renameTextFieldCtrl = TextEditingController(text: targetFileName);
+    targetFolderPathTextFieldCtrl =
+        TextEditingController(text: targetFolderPath);
 
     /// 添加源文件根节点
     formFileRoots.add(
@@ -68,9 +76,11 @@ class _UnzipFileManagerWidgetState extends State<UnzipFileManagerWidget> {
   /// 获取解压文件
   void refreshDatas() async {
     List<ArchiveFile>? files = await _getUnzipFiles(widget.file);
+    fromFileNodes.clear();
+    previewFileNodes.clear();
+
     if (files != null) {
       fromFileNodes.addAll(files.map((e) => MyNode(title: e.name)).toList());
-
       previewFileNodes.addAll(_handlePreviewUnzipFiles(files));
     }
 
@@ -100,8 +110,9 @@ class _UnzipFileManagerWidgetState extends State<UnzipFileManagerWidget> {
           nodes.add(MyNode(title: '$name$suffix'));
         } else {
           // 2x 3x 4x 图片
+          String numberString = sizeSuffix.split('x').first;
           // 建立文件夹
-          String folderName = sizeSuffix;
+          String folderName = '${num.parse(numberString).toDouble()}x';
           nodes.add(MyNode(title: folderName, children: [
             MyNode(title: '$name$suffix'),
           ]));
@@ -161,10 +172,20 @@ class _UnzipFileManagerWidgetState extends State<UnzipFileManagerWidget> {
         // 获取文件名
         String name = index != -1 ? fileName.substring(0, index) : fileName;
 
+        if (sizeSuffix.isNotEmpty) {
+          String numberString = sizeSuffix.split('x').first;
+          // 建立文件夹
+          sizeSuffix = '${num.parse(numberString).toDouble()}x';
+        }
+
+        String inputRename = renameTextFieldCtrl.text;
+        String targetName = inputRename.isEmpty ? name : inputRename;
         String projectPath = widget.project.projectDir.path;
+
+        String targetFolderPath = targetFolderPathTextFieldCtrl.text;
         String outputPath = sizeSuffix.isEmpty
-            ? '$projectPath/$targetFolderPath/$name$suffix'
-            : '$projectPath/$targetFolderPath/$sizeSuffix/$name$suffix';
+            ? '$projectPath/$targetFolderPath/$targetName$suffix'
+            : '$projectPath/$targetFolderPath/$sizeSuffix/$targetName$suffix';
         final outputStream = OutputFileStream(outputPath);
         // The writeContent method will decompress the file content directly to disk without
         // storing the decompressed data in memory.
@@ -231,15 +252,51 @@ class _UnzipFileManagerWidgetState extends State<UnzipFileManagerWidget> {
       color: Colors.grey[200],
       height: 50,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // TextField(
-          //   decoration: InputDecoration(
-          //     hintText: '搜索',
-          //     border: OutlineInputBorder(
-          //       borderRadius: BorderRadius.circular(8),
-          //     ),
-          //   ),
-          // ),
+          const Text('Target Folder Path:'),
+          SizedBox(
+            width: 220,
+            height: 40,
+            child: TextField(
+              controller: targetFolderPathTextFieldCtrl,
+              maxLines: 1,
+              decoration: InputDecoration(
+                hintText: 'path',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintStyle: Theme.of(Get.context!).textTheme.bodySmall,
+                labelStyle: Theme.of(Get.context!).textTheme.bodySmall,
+              ),
+              style: Theme.of(Get.context!).textTheme.bodySmall,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          const Text('rename traget file to:'),
+          SizedBox(
+            width: 220,
+            height: 40,
+            child: TextField(
+              controller: renameTextFieldCtrl,
+              maxLines: 1,
+              decoration: InputDecoration(
+                hintText: 'rename',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                hintStyle: Theme.of(Get.context!).textTheme.bodySmall,
+                labelStyle: Theme.of(Get.context!).textTheme.bodySmall,
+              ),
+              style: Theme.of(Get.context!).textTheme.bodySmall,
+              onChanged: (String text) {
+                targetFileName = text;
+                // refreshDatas();
+              },
+            ),
+          ),
           IconButton(
             onPressed: () async {
               const typeGroup = XTypeGroup(
