@@ -69,29 +69,93 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("项目", style: Theme.of(context).textTheme.titleLarge),
+          // 搜索栏
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "搜索项目",
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      fillColor: const Color.fromRGBO(240, 240, 240, 1),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1, thickness: 1.0, color: Color(0xFFDFE5F1)),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  TextButton(onPressed: () {}, child: const Text("所有项目")),
-                  TextButton(onPressed: () {}, child: const Text("FVM Only")),
-                ],
-              ),
-              ElevatedButton.icon(
-                  onPressed: onAddProjectButton,
-                  icon: const Icon(Icons.add),
-                  label: const Text("添加项目"))
-            ],
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Projects",
+                    style: Theme.of(context).textTheme.titleMedium),
+                Row(
+                  children: [
+                    TextButton(
+                        onPressed: () {},
+                        child: const Row(
+                          children: [
+                            Text(
+                              "All Project",
+                              style: TextStyle(
+                                  color: Color(0xFF7D8DA6),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: Color(0xFF7D8DA6),
+                              size: 24,
+                            ),
+                          ],
+                        )),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0x1A0177FB),
+                          shadowColor: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Color(0xFF0177FB),
+                          size: 22,
+                        ),
+                        label: const Text(
+                          "Add Project",
+                          style: TextStyle(
+                              color: Color(0xFF0177FB),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300),
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
+
           const SizedBox(
             height: 10,
           ),
@@ -103,7 +167,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
                   final GlobalKey selectedVersionButtonKey = GlobalKey();
 
                   return SizedBox(
-                      height: 180,
+                      height: 150,
                       child: InkWell(
                         onTap: () {
                           // 进入项目详情页面
@@ -112,27 +176,62 @@ class _ProjectsPageState extends State<ProjectsPage> {
                           });
                         },
                         child: BrnShadowCard(
-                            padding: const EdgeInsets.all(20),
+                            circular: 10,
+                            // padding: const EdgeInsets.all(20),
                             color: const Color.fromRGBO(255, 255, 255, 1),
                             child: Container(
                               padding: const EdgeInsets.all(10),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Icon(Icons.folder),
-                                  Text(project.name ?? ""),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(children: [
+                                        const Icon(Icons.folder),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          project.name ?? "",
+                                          style: const TextStyle(
+                                              color: Color(0xFF161736),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w300),
+                                        ),
+                                      ]),
+                                      IconButton(
+                                        iconSize: 24,
+                                        icon: const Icon(
+                                          Icons.more_vert_rounded,
+                                          color: Color(0xFF0177FB),
+                                        ),
+                                        onPressed: () {},
+                                      )
+                                    ],
+                                  ),
+                                  // Expanded(
+                                  //   child: Text(project.name ?? "",
+                                  //       maxLines: 2,
+                                  //       overflow: TextOverflow.ellipsis),
+                                  // ),
+                                  const Divider(
+                                      height: 1,
+                                      thickness: 1.0,
+                                      color: Color(0xFFDFE5F1)),
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      // BrnIconButton(
-                                      //     name: '文字在右',
-                                      //     direction: Direction.right,
-                                      //     padding: 4,
-                                      //     iconWidget:
-                                      //         const Icon(Icons.autorenew),
-                                      //     onTap: () {
-                                      //       BrnToast.show('按钮被点击', context);
-                                      //     }),
-                                      ElevatedButton(
+                                      // ElevatedButton.icon(
+                                      //     onPressed: () {},
+                                      //     icon: const Icon(
+                                      //         Icons.access_time_rounded),
+                                      //     label: const Text('文字在右')),
+
+                                      TextButton(
                                           key: selectedVersionButtonKey,
                                           onPressed: () {
                                             // 选择版本
@@ -156,11 +255,19 @@ class _ProjectsPageState extends State<ProjectsPage> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Text(
-                                                project.pinnedVersion ?? "选择版本",
+                                                project.pinnedVersion != null
+                                                    ? "V${project.pinnedVersion}"
+                                                    : "选择版本",
                                                 style: const TextStyle(
-                                                    fontSize: 12),
+                                                    color: Color(0xFF0177FB),
+                                                    fontSize: 14),
                                               ),
-                                              const Icon(Icons.arrow_drop_down),
+                                              const Icon(
+                                                Icons
+                                                    .keyboard_arrow_down_rounded,
+                                                color: Color(0xFF7D8DA6),
+                                                size: 24,
+                                              ),
                                             ],
                                           ))
                                       // TextButton.icon(

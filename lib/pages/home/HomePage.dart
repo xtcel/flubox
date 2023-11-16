@@ -35,44 +35,31 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: BrnAppBar(
-          title: "Flutools",
-          automaticallyImplyLeading: false,
-          actions: [
-            // 设置按钮
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.settings,
-                  color: Colors.grey,
-                ))
-          ],
-        ),
         body: Row(children: [
-          ValueListenableBuilder<int>(
-            valueListenable: _selectIndex,
-            builder: (_, index, __) => LeftNavigation(
-              selectedIndex: index,
-              extended: extended,
-              onLeadingButton: () {
-                extended = !extended;
-                setState(() {});
-              },
-              onDestinationSelected: _onDestinationSelected,
-            ),
-          ),
-          Expanded(
-              child: PageView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _controller,
-            children: const [
-              ProjectsPage(),
-              VersionManagerPage(),
-              ToolsPage(),
-              VersionManagerPage(),
-            ],
-          )),
-        ]));
+      ValueListenableBuilder<int>(
+        valueListenable: _selectIndex,
+        builder: (_, index, __) => LeftNavigation(
+          selectedIndex: index,
+          extended: extended,
+          onLeadingButton: () {
+            extended = !extended;
+            setState(() {});
+          },
+          onDestinationSelected: _onDestinationSelected,
+        ),
+      ),
+      Expanded(
+          child: PageView(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _controller,
+        children: const [
+          ProjectsPage(),
+          VersionManagerPage(),
+          ToolsPage(),
+          VersionManagerPage(),
+        ],
+      )),
+    ]));
   }
 
   void _onDestinationSelected(int value) {
@@ -105,46 +92,58 @@ class LeftNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationRail(
-      leading: leadingButton(),
+      leading: loginWidget(),
       extended: extended,
       minExtendedWidth: 156,
       onDestinationSelected: onDestinationSelected,
       elevation: 1,
       destinations: destinations,
-      trailing: trailingWidget(),
+      trailing: leadingButton(), // trailingWidget(),
       selectedIndex: selectedIndex,
     );
   }
 
   final List<NavigationRailDestination> destinations = const [
     NavigationRailDestination(
-        icon: Icon(Icons.message_outlined), label: Text("项目")),
-    NavigationRailDestination(icon: Icon(Icons.games_sharp), label: Text("代码")),
+        icon: Icon(Icons.apps_rounded), label: Text("Projects")),
     NavigationRailDestination(
-        icon: Icon(Icons.calendar_month), label: Text("工具"))
+        icon: Icon(Icons.settings_suggest_rounded), label: Text("Evn")),
+    NavigationRailDestination(
+        icon: Icon(Icons.construction_rounded), label: Text("Tools"))
   ];
 
-  Widget leadingButton() {
-    return InkWell(
-      onTap: onLeadingButton,
-      child: const Icon(
-        Icons.menu_open,
-        color: Colors.grey,
+  Widget loginWidget() {
+    return const Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: EdgeInsets.only(top: 40, bottom: 20.0),
+        child: Column(
+          children: [
+            FlutterLogo(),
+            SizedBox(
+              height: 10,
+            ),
+            Text("FluBox")
+          ],
+        ),
       ),
     );
   }
 
-  Widget trailingWidget() {
+  Widget leadingButton() {
     return Expanded(
       child: Align(
         alignment: Alignment.bottomCenter,
-        child: InkWell(
-          onTap: () {
-            onDestinationSelected?.call(destinations.length);
-          },
-          child: const Padding(
-            padding: EdgeInsets.only(bottom: 20.0),
-            child: FlutterLogo(),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: InkWell(
+            onTap: onLeadingButton,
+            child: Icon(
+              extended
+                  ? Icons.format_indent_decrease_rounded
+                  : Icons.format_indent_increase_rounded,
+              color: const Color(0xFFD8D8D8),
+            ),
           ),
         ),
       ),
