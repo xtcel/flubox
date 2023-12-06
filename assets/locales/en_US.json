@@ -1,0 +1,50 @@
+{
+  "buttons": {
+    "setting": "Settings",
+    "cancel": "Cancel",
+    "close": "Close",
+    "refresh": "Refresh",
+    "add_project": "Add project",
+    "select_version": "Select version",
+    "add": "Add",
+    "remove": "Remove",
+    "save": "Save",
+    "edit": "Edit",
+    "details": "Details",
+    "setAsGlobal": "Set as global"
+  },
+  "labels": {
+    "wait": "Wait",
+    "pull_to_refresh": "Pull to refresh",
+    "release_to_refresh": "Release to refresh",
+    "refreshing": "Refreshing",
+    "refresh_completed": "Refresh completed",
+    "refresh_failed": "Refresh failed",
+    "no_more": "No more",
+    "no_data": "No data",
+    "loading": "Loading",
+    "projects": "Projects",
+    "tools": "Tools",
+    "environments": "Environments",
+    "all_project": "All project",
+    "only_fvm": "Only FVM",
+    "search": "Search",
+    "variable_name": "Variable Name",
+    "variable_value": "Variable Value",
+    "status": "Status",
+    "operation": "Operation",
+    "installed_versions": "Installed Versions",
+    "versions": "Versions",
+    "global": "Global",
+    "env_variables": "Env Variables",
+    "switch_version": "Switch version",
+    "donwload_version": "Donwload Version",
+    "how_to_configure": "How to configure ?",
+    "unix_time_stamp": "Time Stamp"
+  },
+  "tips": {
+    "not_a_flutter_project": "Not a flutter project",
+    "system_error": "System error",
+    "removing" : "Removing..."
+  }
+}

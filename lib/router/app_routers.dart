@@ -16,4 +16,7 @@ abstract class Routers {
 
   /// 资源管理页面
   static const String resourceManagerPage = '/resourceManagerPage';
+
+  /// Unix时间戳转换
+  static const String unixTimeConvertPage = '/unixTimeConvertPage';
 }

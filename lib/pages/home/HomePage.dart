@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 
 import '../projects/projects_page.dart';
-import '../tools/tools_page.dart';
-import '../version_manager/version_manager_page.dart';
+import '../settings/settings_page.dart';
+import '../tools/tools_index_page.dart';
+import '../version_manager/environments_page.dart';
 
 /// 首页
 
@@ -54,9 +54,9 @@ class _HomePageState extends State<HomePage> {
         controller: _controller,
         children: const [
           ProjectsPage(),
-          VersionManagerPage(),
-          ToolsPage(),
-          VersionManagerPage(),
+          EnvironmentsPage(),
+          ToolsIndexPage(),
+          SettingsPage(),
         ],
       )),
     ]));
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
 
   void _onDestinationSelected(int value) {
     _controller.jumpToPage(value); // tag1
-    if (value < 3) {
+    if (value < 4) {
       _selectIndex.value = value; //tag2
     }
   }
@@ -109,7 +109,9 @@ class LeftNavigation extends StatelessWidget {
     NavigationRailDestination(
         icon: Icon(Icons.settings_suggest_rounded), label: Text("Evn")),
     NavigationRailDestination(
-        icon: Icon(Icons.construction_rounded), label: Text("Tools"))
+        icon: Icon(Icons.construction_rounded), label: Text("Tools")),
+    NavigationRailDestination(
+        icon: Icon(Icons.settings), label: Text("Settings"))
   ];
 
   Widget loginWidget() {

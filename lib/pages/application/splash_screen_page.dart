@@ -34,10 +34,9 @@ class _SplashScreenState extends State<SplashScreenPage> {
             flex: 1,
             child: Container(),
           ),
-          SizedBox(
-              width: 210,
-              height: 100,
-              child: Image.asset("assets/images/logo.png")),
+          const SizedBox(
+              child: Icon(Icons
+                  .logo_dev_rounded)), //Image.asset("assets/images/logo.png")),
           Expanded(
             flex: 2,
             child: Container(),

@@ -1,0 +1,25 @@
+{
+  "buttons": {
+    "setting": "设置",
+    "cancel": "取消",
+    "refresh": "刷新",
+    "add_project": "添加项目"
+  },
+  "labels": {
+    "projects": "项目",
+    "tools": "工具",
+    "environment": "环境",
+    "wait": "等待",
+    "pull_to_refresh": "下拉刷新",
+    "release_to_refresh": "松开刷新",
+    "refreshing": "刷新中",
+    "refresh_completed": "刷新完成",
+    "refresh_failed": "刷新失败",
+    "no_more": "没有更多了",
+    "no_data": "暂无数据",
+    "loading": "加载中"
+  },
+  "tips": {
+    "system_error": "系统错误"
+  }
+}

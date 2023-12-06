@@ -6,6 +6,7 @@ import 'package:flubox/router/app_routers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,10 +15,11 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'i18n/ChineseCupertinoLocalizations.dart';
-import 'i18n/localizations.dart';
+import 'generated/locales.g.dart';
+import 'utils/ChineseCupertinoLocalizations.dart';
 import 'router/app_pages.dart';
 import 'pages/404/unknown_route_page.dart';
+import 'theme/theme_config.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -142,18 +144,20 @@ class _MyHomePageState extends State<MyHomePage> {
         return GetMaterialApp(
             title: 'flubox',
             // navigatorKey: rootNavigatorKey,
-            // theme: LeLeThemeConfig.defaultTheme,
+            theme: LeLeThemeConfig.defaultTheme,
+            darkTheme: LeLeThemeConfig.darkTheme,
+            themeMode: ThemeMode.system,
             // 去掉模拟器调试debug标识
             debugShowCheckedModeBanner: false,
             initialRoute: Routers.splashScreen,
             getPages: AppPages.getPages,
             unknownRoute: GetPage(
                 name: '/notfound', page: () => const UnknownRoutePage()),
-            translations: GetLocalizations(),
+            translationsKeys: AppTranslation.translations,
             // 默认使用设备系统选择语言
             locale: Get.deviceLocale,
             // 失败使用中文语言
-            fallbackLocale: const Locale('zh', 'CH'),
+            fallbackLocale: const Locale('en', 'US'),
             localizationsDelegates: [
               ChineseCupertinoLocalizations.delegate, // 自定义的delegate
               DefaultCupertinoLocalizations.delegate, // 默认的只支持英文
@@ -166,9 +170,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Locale('zh', 'CH'),
               Locale('en', 'US'),
             ],
-            builder: (BuildContext context, Widget? child) {
-              return Material(child: child);
-            }
+            builder: EasyLoading.init(
+                builder: (context, child) => Material(child: child))
             // need set root widget to material, fix "No Material widget found" bugs,
             // home: const MyHomePage(title: 'Flutter Demo Home Page'),
             );

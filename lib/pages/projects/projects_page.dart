@@ -5,10 +5,14 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flubox/router/app_routers.dart';
 import 'package:flubox/router/arguments_keys.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+
+import '../../generated/locales.g.dart';
+import '../../utils/open_link.dart';
 
 /// projects page
 ///
@@ -31,10 +35,11 @@ class _ProjectsPageState extends State<ProjectsPage> {
   final bool _dragging = false;
   final List<XFile> _dropFileList = [];
   List<CacheVersion> versions = [];
+  String filter = LocaleKeys.labels_all_project.tr;
+  List<Project> filteredProjects = <Project>[];
 
   @override
   void initState() {
-    // TODO: implement initState
     getProjects();
     getFlutterReleases();
 
@@ -43,15 +48,12 @@ class _ProjectsPageState extends State<ProjectsPage> {
 
   void getProjects() async {
     // 获取项目列表
-    // List<Project> projects = await FVMClient.fetchProjects();
-    // ProjectRef project = const ProjectRef(name: 'test', path: '/Users/test');
-    // box.add(project);
     box = await Hive.openBox<ProjectRef>(_key);
-    // box.clear();
     try {
       List<Directory> directories =
           box.values.map((e) => Directory(e.path)).toList();
       projects = await FVMClient.fetchProjects(directories);
+      filteredProjects = projects;
       print("box: $box");
       setState(() {});
     } catch (e) {}
@@ -60,7 +62,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
   void getFlutterReleases() async {
     CacheVersion? globalVersion = await FVMClient.getGlobal();
     print("global version: $globalVersion");
-    // currentVersion = globalVersion?.name ?? "";
 
     versions = await FVMClient.getCachedVersions();
     print("cached versions :$versions");
@@ -72,31 +73,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 搜索栏
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "搜索项目",
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(240, 240, 240, 1),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-          ),
-          const Divider(height: 1, thickness: 1.0, color: Color(0xFFDFE5F1)),
           const SizedBox(
             height: 20,
           ),
@@ -105,28 +81,59 @@ class _ProjectsPageState extends State<ProjectsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Projects",
+                Text(LocaleKeys.labels_projects.tr,
                     style: Theme.of(context).textTheme.titleMedium),
                 Row(
                   children: [
-                    TextButton(
-                        onPressed: () {},
-                        child: const Row(
-                          children: [
-                            Text(
-                              "All Project",
-                              style: TextStyle(
-                                  color: Color(0xFF7D8DA6),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                            Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: Color(0xFF7D8DA6),
-                              size: 24,
-                            ),
-                          ],
-                        )),
+                    // 项目筛选
+                    PopupMenuButton(
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            value: 'all',
+                            child: Text(LocaleKeys.labels_all_project.tr),
+                          ),
+                          PopupMenuItem(
+                            value: 'fvm',
+                            child: Text(LocaleKeys.labels_only_fvm.tr),
+                          ),
+                        ];
+                      },
+                      onSelected: (value) {
+                        print('onSelected:$value');
+                        if (value == 'all') {
+                          setState(() {
+                            filter = LocaleKeys.labels_all_project.tr;
+                            filteredProjects = projects;
+                          });
+                        } else if (value == 'fvm') {
+                          setState(() {
+                            filter = LocaleKeys.labels_only_fvm.tr;
+                            filteredProjects = projects
+                                .where(
+                                    (project) => project.pinnedVersion != null)
+                                .toList();
+                          });
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            filter,
+                            style: const TextStyle(
+                                color: Color(0xFF7D8DA6),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w300),
+                          ),
+                          const Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: Color(0xFF7D8DA6),
+                            size: 24,
+                          ),
+                        ],
+                      ),
+                    ),
+
                     const SizedBox(
                       width: 20,
                     ),
@@ -137,15 +144,15 @@ class _ProjectsPageState extends State<ProjectsPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                         ),
-                        onPressed: () {},
+                        onPressed: onAddProjectButton,
                         icon: const Icon(
                           Icons.add,
                           color: Color(0xFF0177FB),
                           size: 22,
                         ),
-                        label: const Text(
-                          "Add Project",
-                          style: TextStyle(
+                        label: Text(
+                          LocaleKeys.buttons_add_project.tr,
+                          style: const TextStyle(
                               color: Color(0xFF0177FB),
                               fontSize: 16,
                               fontWeight: FontWeight.w300),
@@ -155,7 +162,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
               ],
             ),
           ),
-
           const SizedBox(
             height: 10,
           ),
@@ -163,7 +169,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
             child: ResponsiveGridList(
                 desiredItemWidth: 250,
                 minSpacing: 10,
-                children: projects.map((project) {
+                children: filteredProjects.map((project) {
                   final GlobalKey selectedVersionButtonKey = GlobalKey();
 
                   return SizedBox(
@@ -202,85 +208,94 @@ class _ProjectsPageState extends State<ProjectsPage> {
                                               fontWeight: FontWeight.w300),
                                         ),
                                       ]),
-                                      IconButton(
-                                        iconSize: 24,
-                                        icon: const Icon(
-                                          Icons.more_vert_rounded,
-                                          color: Color(0xFF0177FB),
-                                        ),
-                                        onPressed: () {},
-                                      )
+                                      _buildMoreButton(project)
                                     ],
                                   ),
-                                  // Expanded(
-                                  //   child: Text(project.name ?? "",
-                                  //       maxLines: 2,
-                                  //       overflow: TextOverflow.ellipsis),
-                                  // ),
-                                  const Divider(
-                                      height: 1,
-                                      thickness: 1.0,
-                                      color: Color(0xFFDFE5F1)),
-
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                  Column(
                                     children: [
-                                      // ElevatedButton.icon(
-                                      //     onPressed: () {},
-                                      //     icon: const Icon(
-                                      //         Icons.access_time_rounded),
-                                      //     label: const Text('文字在右')),
-
-                                      TextButton(
-                                          key: selectedVersionButtonKey,
-                                          onPressed: () {
-                                            // 选择版本
-                                            BrnPopupListWindow
-                                                .showPopListWindow(
-                                              context,
-                                              selectedVersionButtonKey,
-                                              data: versions
-                                                  .map(
-                                                      (version) => version.name)
-                                                  .toList(),
-                                              onItemClick: (index, item) {
-                                                // 切换项目版本
-                                                checkVersion(project, item);
-
-                                                return false;
-                                              },
-                                            );
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
+                                      const Divider(
+                                          height: 1,
+                                          thickness: 1.0,
+                                          color: Color(0xFFDFE5F1)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
                                             children: [
-                                              Text(
-                                                project.pinnedVersion != null
-                                                    ? "V${project.pinnedVersion}"
-                                                    : "选择版本",
-                                                style: const TextStyle(
-                                                    color: Color(0xFF0177FB),
-                                                    fontSize: 14),
+                                              // Show In finder
+                                              IconButton(
+                                                iconSize: 24,
+                                                icon: const Icon(
+                                                  Icons.folder_open_rounded,
+                                                  color: Color(0xFF0177FB),
+                                                ),
+                                                onPressed: () {
+                                                  // 打开文件夹
+                                                  openPath(project.projectDir
+                                                      .absolute.path);
+                                                },
                                               ),
-                                              const Icon(
-                                                Icons
-                                                    .keyboard_arrow_down_rounded,
-                                                color: Color(0xFF7D8DA6),
-                                                size: 24,
+                                              // Open in IDE
+                                              IconButton(
+                                                iconSize: 24,
+                                                icon: const Icon(
+                                                  Icons.code_rounded,
+                                                  color: Color(0xFF0177FB),
+                                                ),
+                                                onPressed: () {
+                                                  // 打开项目
+                                                  openVsCode(project.projectDir
+                                                      .absolute.path);
+                                                },
                                               ),
                                             ],
-                                          ))
-                                      // TextButton.icon(
-                                      //   key: selectedVersionButtonKey,
-                                      //   onPressed: () {
+                                          ),
+                                          TextButton(
+                                              key: selectedVersionButtonKey,
+                                              onPressed: () {
+                                                // 选择版本
+                                                BrnPopupListWindow
+                                                    .showPopListWindow(
+                                                  context,
+                                                  selectedVersionButtonKey,
+                                                  data: versions
+                                                      .map((version) =>
+                                                          version.name)
+                                                      .toList(),
+                                                  onItemClick: (index, item) {
+                                                    // 切换项目版本
+                                                    checkVersion(project, item);
 
-                                      //   },
-                                      //   icon: const Icon(Icons.arrow_drop_down),
-                                      //   label: Text(
-                                      //     project.pinnedVersion ?? "选择版本",
-                                      //     style: const TextStyle(fontSize: 12),
-                                      //   ),
-                                      // )
+                                                    return false;
+                                                  },
+                                                );
+                                              },
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    project.pinnedVersion !=
+                                                            null
+                                                        ? "V${project.pinnedVersion}"
+                                                        : LocaleKeys
+                                                            .buttons_select_version
+                                                            .tr,
+                                                    style: const TextStyle(
+                                                        color:
+                                                            Color(0xFF0177FB),
+                                                        fontSize: 14),
+                                                  ),
+                                                  const Icon(
+                                                    Icons
+                                                        .keyboard_arrow_down_rounded,
+                                                    color: Color(0xFF7D8DA6),
+                                                    size: 24,
+                                                  ),
+                                                ],
+                                              ))
+                                        ],
+                                      ),
                                     ],
                                   )
                                 ],
@@ -294,11 +309,36 @@ class _ProjectsPageState extends State<ProjectsPage> {
     );
   }
 
+  Widget _buildMoreButton(Project project) {
+    return PopupMenuButton(
+      itemBuilder: (context) {
+        return [
+          const PopupMenuItem(
+            value: 'delete',
+            child: Text('删除'),
+          ),
+        ];
+      },
+      onSelected: (value) {
+        print('onSelected:$value');
+        if (value == 'delete') {
+          // 删除项目
+          box.delete(project.projectDir.absolute.path);
+          // 刷新项目列表数据
+          setState(() {
+            getProjects();
+          });
+        }
+      },
+      child: const Icon(Icons.more_vert_rounded),
+    );
+  }
+
   // 切换项目版本
   void checkVersion(Project project, String version) async {
     await FVMClient.pinVersion(project, version);
-    String toast = "${project.name}已切换到version: $version";
-    BrnToast.show(toast, context);
+    // String toast = "${project.name} 已切换到: $version";
+    // EasyLoading.showToast(toast);
     // 刷新项目列表数据
     setState(() {
       getProjects();
@@ -328,9 +368,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
       // 刷新数据
       getProjects();
     } else {
-      // ignore: use_build_context_synchronously
-      BrnToast.show('modules:projects.notAFlutterProject'.tr, context);
-      // notify(context.i18n('modules:projects.notAFlutterProject'));
+      EasyLoading.showToast(LocaleKeys.tips_not_a_flutter_project.tr);
     }
   }
 }

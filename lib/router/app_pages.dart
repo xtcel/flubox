@@ -1,6 +1,8 @@
 import 'package:flubox/pages/projects/project_detial/apps/resource_manager/resource_manager_page.dart';
 import 'package:flubox/pages/projects/project_detial/project_detail_page.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import '../pages/tools/modules/timestamp_page.dart';
 import 'app_routers.dart';
 import '../pages/application/splash_screen_page.dart';
 import '../pages/home/HomePage.dart';
@@ -32,6 +34,14 @@ class AppPages {
     GetPage(
         name: Routers.resourceManagerPage,
         page: () => const ResourceManagerPage()),
+    // 时间戳转换工具页面
+    GetPage(
+      name: Routers.unixTimeConvertPage,
+      page: () => const UnixTimestampConverterPage(),
+      // 设置跳转动画为从下到上
+      transition: Transition.upToDown,
+    ),
+
     // GetPage(
     //     name: Routers.firstLaunchUsageAgreement,
     //     page: () => const FirstLaunchUsageAgreementPage(),
