@@ -107,11 +107,11 @@ class _VersionManagerState extends State<EnvironmentsPage>
     return TabBar(
         tabs: tabs,
         controller: _tabController,
-        isScrollable: false,
+        isScrollable: true,
         automaticIndicatorColorAdjustment: false,
-        indicatorColor: Colors.blue,
+        indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
         indicatorSize: TabBarIndicatorSize.label,
-        labelColor: Colors.black,
+        labelColor: Theme.of(context).tabBarTheme.labelColor,
         onTap: (index) => _onTabTap(index));
   }
 

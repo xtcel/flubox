@@ -35,21 +35,32 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(project.name ?? ""),
-      ),
-      body: Column(
-        children: [
-          const Text("project_name"),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: Wrap(
-              children: [
-                ..._buildItemWidgets(),
-              ],
-            ),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.close),
           ),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Wrap(
+                children: [
+                  ..._buildItemWidgets(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -67,10 +78,6 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             children: [Icon(Icons.folder), Text("资源管理")],
           ),
         ),
-      ),
-      Container(
-        padding: const EdgeInsets.all(10),
-        child: const Text("项目路径"),
       ),
     ];
   }

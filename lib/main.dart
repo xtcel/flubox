@@ -16,10 +16,17 @@ import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'generated/locales.g.dart';
+import 'pages/projects/project.dto.dart';
+import 'pages/projects/projects.service.dart';
+import 'pages/settings/settings.dto.dart';
+import 'pages/settings/settings.service.dart';
 import 'utils/ChineseCupertinoLocalizations.dart';
 import 'router/app_pages.dart';
 import 'pages/404/unknown_route_page.dart';
 import 'theme/theme_config.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+
+import 'utils/package_info_util.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +54,19 @@ void realRunApp() async {
   Hive.init(hiveDir.absolute.path);
 
   Hive.registerAdapter(ProjectPathAdapter());
+  Hive.registerAdapter(SidekickSettingsAdapter());
+
+  try {
+    await SettingsService.init();
+    await ProjectsService.init();
+  } on FileSystemException {
+    //print('There was an issue opening the DB');
+  }
+
+  if (!(Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {
+    //print('Sidekick is not supported on your platform');
+    exit(0);
+  }
 
   WindowOptions windowOptions = const WindowOptions(
     size: Size(1000, 720),
@@ -59,6 +79,8 @@ void realRunApp() async {
     await windowManager.show();
     await windowManager.focus();
   });
+
+  PackageInfoUtil.getInstance();
 
   if (kDebugMode) {
     // 应用内调试工具
@@ -88,29 +110,29 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return const MaterialApp(
+      title: 'Flubox',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // theme: ThemeData(
+      //   // This is the theme of your application.
+      //   //
+      //   // TRY THIS: Try running your application with "flutter run". You'll see
+      //   // the application has a blue toolbar. Then, without quitting the app,
+      //   // try changing the seedColor in the colorScheme below to Colors.green
+      //   // and then invoke "hot reload" (save your changes or press the "hot
+      //   // reload" button in a Flutter-supported IDE, or press "r" if you used
+      //   // the command line to start the app).
+      //   //
+      //   // Notice that the counter didn't reset back to zero; the application
+      //   // state is not lost during the reload. To reset the state, use hot
+      //   // restart instead.
+      //   //
+      //   // This works for code too, not just values: Most code changes can be
+      //   // tested with just a hot reload.
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+      //   useMaterial3: true,
+      // ),
+      home: MyHomePage(title: 'Flubox Home Page'),
     );
   }
 }
@@ -136,16 +158,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final settings = SettingsService.read();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, widget) {
         return GetMaterialApp(
-            title: 'flubox',
+            title: 'Flubox',
             // navigatorKey: rootNavigatorKey,
-            theme: LeLeThemeConfig.defaultTheme,
-            darkTheme: LeLeThemeConfig.darkTheme,
+            // theme: LeLeThemeConfig.defaultTheme,
+            // darkTheme: LeLeThemeConfig.darkTheme,
+            theme: FlexThemeData.light(scheme: FlexScheme.hippieBlue),
+            // The Mandy red, dark theme.
+            darkTheme: FlexThemeData.dark(scheme: FlexScheme.hippieBlue),
             themeMode: ThemeMode.system,
             // 去掉模拟器调试debug标识
             debugShowCheckedModeBanner: false,
@@ -155,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 name: '/notfound', page: () => const UnknownRoutePage()),
             translationsKeys: AppTranslation.translations,
             // 默认使用设备系统选择语言
-            locale: Get.deviceLocale,
+            locale: settings.locale ?? Get.deviceLocale,
             // 失败使用中文语言
             fallbackLocale: const Locale('en', 'US'),
             localizationsDelegates: [

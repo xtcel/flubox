@@ -13,6 +13,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../generated/locales.g.dart';
 import '../../utils/open_link.dart';
+import 'project.dto.dart';
 
 /// projects page
 ///
@@ -176,10 +177,10 @@ class _ProjectsPageState extends State<ProjectsPage> {
                       height: 150,
                       child: InkWell(
                         onTap: () {
-                          // 进入项目详情页面
-                          Get.toNamed(Routers.projectDetailPage, arguments: {
-                            ArgumentsKeys.model: project,
-                          });
+                          // TODO: 进入项目详情页面
+                          // Get.toNamed(Routers.projectDetailPage, arguments: {
+                          //   ArgumentsKeys.model: project,
+                          // });
                         },
                         child: BrnShadowCard(
                             circular: 10,
@@ -373,50 +374,50 @@ class _ProjectsPageState extends State<ProjectsPage> {
   }
 }
 
-/// Ref to project path
-class ProjectRef {
-  /// Constructor
-  const ProjectRef({
-    required this.name,
-    required this.path,
-  });
+// /// Ref to project path
+// class ProjectRef {
+//   /// Constructor
+//   const ProjectRef({
+//     required this.name,
+//     required this.path,
+//   });
 
-  /// Project name
-  final String name;
+//   /// Project name
+//   final String name;
 
-  /// Project path
-  final String path;
+//   /// Project path
+//   final String path;
 
-  /// Creates a project path from map
-  factory ProjectRef.fromMap(Map<String, String> map) {
-    return ProjectRef(
-      name: map['name'] ?? '',
-      path: map['path'] ?? '',
-    );
-  }
+//   /// Creates a project path from map
+//   factory ProjectRef.fromMap(Map<String, String> map) {
+//     return ProjectRef(
+//       name: map['name'] ?? '',
+//       path: map['path'] ?? '',
+//     );
+//   }
 
-  /// Returns project path as a map
-  Map<String, String> toMap() {
-    return {
-      'name': name,
-      'path': path,
-    };
-  }
-}
+//   /// Returns project path as a map
+//   Map<String, String> toMap() {
+//     return {
+//       'name': name,
+//       'path': path,
+//     };
+//   }
+// }
 
-/// Project path adapter
-class ProjectPathAdapter extends TypeAdapter<ProjectRef> {
-  @override
-  int get typeId => 2; // this is unique, no other Adapter can have the same id.
+// /// Project path adapter
+// class ProjectPathAdapter extends TypeAdapter<ProjectRef> {
+//   @override
+//   int get typeId => 2; // this is unique, no other Adapter can have the same id.
 
-  @override
-  ProjectRef read(BinaryReader reader) {
-    final value = Map<String, String>.from(reader.readMap());
-    return ProjectRef.fromMap(value);
-  }
+//   @override
+//   ProjectRef read(BinaryReader reader) {
+//     final value = Map<String, String>.from(reader.readMap());
+//     return ProjectRef.fromMap(value);
+//   }
 
-  @override
-  void write(BinaryWriter writer, ProjectRef obj) {
-    writer.writeMap(obj.toMap());
-  }
-}
+//   @override
+//   void write(BinaryWriter writer, ProjectRef obj) {
+//     writer.writeMap(obj.toMap());
+//   }
+// }

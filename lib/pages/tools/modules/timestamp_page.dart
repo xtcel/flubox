@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../generated/locales.g.dart';
@@ -18,12 +20,11 @@ class UnixTimestampConverterPage extends StatefulWidget {
 class _UnixTimestampConverterPageState
     extends State<UnixTimestampConverterPage> {
   String _currentTimestamp = '';
-  final TextEditingController _yearController = TextEditingController();
-  final TextEditingController _monthController = TextEditingController();
-  final TextEditingController _dayController = TextEditingController();
-  final TextEditingController _hourController = TextEditingController();
-  final TextEditingController _minuteController = TextEditingController();
-  final TextEditingController _secondController = TextEditingController();
+  final TextEditingController _timestampController = TextEditingController();
+  String _converedTimeString = '';
+
+  final TextEditingController _timeController = TextEditingController();
+
   String _convertedTimestamp = '';
   bool pauseTimeStamp = false;
 
@@ -32,6 +33,10 @@ class _UnixTimestampConverterPageState
     super.initState();
     Timer.periodic(
         const Duration(seconds: 1), (Timer t) => _getCurrentTimestamp());
+    _timestampController.value = TextEditingValue(
+        text: DateTime.now().millisecondsSinceEpoch.toString());
+    _timeController.value = TextEditingValue(
+        text: DateTime.now().toLocal().toString().substring(0, 19));
   }
 
   void _getCurrentTimestamp() {
@@ -44,15 +49,18 @@ class _UnixTimestampConverterPageState
   }
 
   void _convertToUnixTimestamp() {
-    int year = int.parse(_yearController.text);
-    int month = int.parse(_monthController.text);
-    int day = int.parse(_dayController.text);
-    int hour = int.parse(_hourController.text);
-    int minute = int.parse(_minuteController.text);
-    int second = int.parse(_secondController.text);
-    DateTime dateTime = DateTime(year, month, day, hour, minute, second);
+    String inputString = _timeController.text;
+    DateTime? dateTime = DateTime.tryParse(inputString);
     setState(() {
-      _convertedTimestamp = dateTime.millisecondsSinceEpoch.toString();
+      _convertedTimestamp = dateTime?.millisecondsSinceEpoch.toString() ?? "";
+    });
+  }
+
+  void _convertTimestampToDateTime() {
+    int timestamp = int.parse(_timestampController.text);
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    setState(() {
+      _converedTimeString = dateTime.toString();
     });
   }
 
@@ -72,12 +80,26 @@ class _UnixTimestampConverterPageState
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Row(
               children: [
-                Text('Current Timestamp: $_currentTimestamp'),
+                const Text('Current Timestamp: '),
+                TextButton(
+                    onPressed: () {
+                      // 点击复制时间戳
+                      Clipboard.setData(ClipboardData(text: _currentTimestamp));
+                      // 设置timeStamp
+                      setState(() {
+                        _timestampController.value =
+                            TextEditingValue(text: _currentTimestamp);
+                      });
+
+                      // 已复制
+                      EasyLoading.showToast("已复制");
+                    },
+                    child: Text(_currentTimestamp)),
                 const SizedBox(
                   width: 15,
                 ),
@@ -93,52 +115,54 @@ class _UnixTimestampConverterPageState
                         : Icons.stop_circle_rounded))
               ],
             ),
+            // 时间戳转时间
             Row(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  width: 55,
+                  width: 200,
                   child: TextField(
-                      controller: _yearController,
-                      decoration: const InputDecoration(hintText: 'Year')),
+                    controller: _timestampController,
+                    decoration:
+                        const InputDecoration(hintText: 'Enter Unix Timestamp'),
+                  ),
                 ),
-                SizedBox(
-                  width: 55,
-                  child: TextField(
-                      controller: _monthController,
-                      decoration: const InputDecoration(hintText: 'Month')),
+                const SizedBox(
+                  width: 15,
                 ),
-                SizedBox(
-                  width: 55,
-                  child: TextField(
-                      controller: _dayController,
-                      decoration: const InputDecoration(hintText: 'Day')),
+                ElevatedButton(
+                  onPressed: _convertTimestampToDateTime,
+                  child: const Text('Convert ->'),
                 ),
-                SizedBox(
-                  width: 55,
-                  child: TextField(
-                      controller: _hourController,
-                      decoration: const InputDecoration(hintText: 'Hour')),
+                const SizedBox(
+                  width: 15,
                 ),
-                SizedBox(
-                  width: 55,
-                  child: TextField(
-                      controller: _minuteController,
-                      decoration: const InputDecoration(hintText: 'Minute')),
-                ),
-                SizedBox(
-                  width: 55,
-                  child: TextField(
-                      controller: _secondController,
-                      decoration: const InputDecoration(hintText: 'Second')),
-                ),
+                Text(_converedTimeString),
               ],
             ),
-            ElevatedButton(
-              onPressed: _convertToUnixTimestamp,
-              child: const Text('Convert to Unix Timestamp'),
+
+            // 时间转时间戳
+            Row(
+              children: [
+                SizedBox(
+                  width: 200,
+                  child: TextField(
+                      controller: _timeController,
+                      decoration:
+                          const InputDecoration(hintText: 'Unix Time ')),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  onPressed: _convertToUnixTimestamp,
+                  child: const Text('Convert ->'),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(_convertedTimestamp),
+              ],
             ),
-            Text('Converted Timestamp: $_convertedTimestamp'),
           ],
         ),
       ),

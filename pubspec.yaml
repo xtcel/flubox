@@ -60,6 +60,10 @@ dependencies:
   path: ^1.8.3
   url_launcher: ^6.2.1
   flutter_easyloading: ^3.0.5
+  material_design_icons_flutter: ^7.0.7296
+  flex_color_scheme: ^7.3.1
+  pubspec_parse: ^1.2.3
+  package_info_plus: ^4.2.0
 
 dev_dependencies:
   flutter_test:

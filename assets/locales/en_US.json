@@ -8,10 +8,12 @@
     "select_version": "Select version",
     "add": "Add",
     "remove": "Remove",
+    "confirm": "Confirm",
     "save": "Save",
     "edit": "Edit",
     "details": "Details",
     "setAsGlobal": "Set as global"
+
   },
   "labels": {
     "wait": "Wait",
@@ -35,16 +37,59 @@
     "operation": "Operation",
     "installed_versions": "Installed Versions",
     "versions": "Versions",
+    "version": "Version",
     "global": "Global",
     "env_variables": "Env Variables",
     "switch_version": "Switch version",
     "donwload_version": "Donwload Version",
     "how_to_configure": "How to configure ?",
-    "unix_time_stamp": "Time Stamp"
+    "unix_time_stamp": "Unix Time Stamp",
+    "unix_time_stmap_desc": "unix time stamp convert utility",
+    "flutter_icons": "Flutter Icons",
+    "flutter_icons_desc": "flutter icons convert utility",
+    "json_format": "JSON Format",
+    "json_format_desc": "json format convert utility",
+    "settings": {
+      "general": "General",
+      "fvm": "FVM",
+      "flutter": "Flutter",
+      "theme": "Theme",
+      "system": "System",
+      "dark": "Dark",
+      "light": "Light",
+      "ideSelection": "IDE Selection",
+      "language": "Language",
+      "resetToDefaultSettings": "Reset to Default Settings",
+      "reset": "Reset",
+      "selectAThemeOrSwitchAccordingToSystemSettings": "Select a theme or switch according to system settings",
+      "whatIdeDoYouWantToOpenYourProjectsWith": "What IDE do you want to open your projects with?",
+      "skipSetupFlutterOnInstall": "Skip setup flutter on install",
+      "thisWillOnlyCloneFlutterAndNotInstall": "This will only clone flutter and not install",
+      "dependenciesAfterANewVersionIsInstalled": "Dependencies after a new version is installed",
+      "platforms": "Platforms",
+      "web": "Web",
+      "flutterSDKGlobalDescription": "A flutter sdk version must be set as global to access the flutter settings",
+      "analyticsCrashReporting": "Analytics & crash reporting",
+      "analyticsCrashReportSubtitle": "When a Flutter command crashes, an attempt is made to send a crash report to Google so that Google can contribute improvements to Flutter over time"
+    },
+    "common": {
+      "stableChannelDescription": "We recommend that you use this channel for all production app releases. About once a quarter, a branch that has been stabilised to beta becomes our next stable branch and we create a stable version of that branch.",
+      "betaChannelDescription": "Branch created for a new beta release at the beginning of the month, usually the first Monday, by master. This will contain a branch for Dart, the engine and the framework.",
+      "devChannelDescription": "The last fully tested build. Usually working, but see \"Bad builds\" for a list of known \"bad\" Dev builds.",
+      "masterChannelDescription": "The latest tip-of-tree, absolutely latest cutting edge build. Usually functional, though sometimes we accidentally break things."
+    }
   },
   "tips": {
     "not_a_flutter_project": "Not a flutter project",
     "system_error": "System error",
-    "removing" : "Removing..."
+    "removing" : "Removing...",
+    "settings": {
+      "areYouSureYouWantToResetSettings": "Are you sure you want to reset settings?",
+      "thisWillOnlyResetSidekickSpecificPreferences": "This will only reset Sidekick specific settings"
+    }
+  },
+  "languages": {
+    "en_US": "English",
+    "zh_CN": "Chinese"
   }
 }

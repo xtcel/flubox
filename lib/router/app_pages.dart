@@ -2,6 +2,8 @@ import 'package:flubox/pages/projects/project_detial/apps/resource_manager/resou
 import 'package:flubox/pages/projects/project_detial/project_detail_page.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import '../pages/tools/modules/binary_convert_page.dart';
+import '../pages/tools/modules/flutter_icons_page.dart';
 import '../pages/tools/modules/timestamp_page.dart';
 import 'app_routers.dart';
 import '../pages/application/splash_screen_page.dart';
@@ -41,18 +43,19 @@ class AppPages {
       // 设置跳转动画为从下到上
       transition: Transition.upToDown,
     ),
-
-    // GetPage(
-    //     name: Routers.firstLaunchUsageAgreement,
-    //     page: () => const FirstLaunchUsageAgreementPage(),
-    //     binding: AppBinding()),
-    // GetPage(
-    //   name: Routers.loginPage,
-    //   page: () => LoginPage(),
-    //   // binding: TestOneBinding(),
-    // ),
-    // GetPage(name: Routers.testPage, page: () => const TestPage()),
-    // GetPage(name: Routers.setting, page: () => const SettingPage()),
-    // GetPage(name: Routers.settingProxy, page: () => const SettingProxyPage()),
+    // 进制转换页面
+    GetPage(
+      name: Routers.binaryConvertPage,
+      page: () => const BinaryConvertPage(),
+      // 设置跳转动画为从下到上
+      transition: Transition.upToDown,
+    ),
+    // flutter 图标库页面
+    GetPage(
+      name: Routers.flutterIconsPage,
+      page: () => const FlutterIconPage(),
+      // 设置跳转动画为从下到上
+      transition: Transition.upToDown,
+    ),
   ];
 }

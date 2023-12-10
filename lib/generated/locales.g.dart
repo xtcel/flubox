@@ -32,6 +32,7 @@ class LocaleKeys {
   static const buttons_select_version = 'buttons_select_version';
   static const buttons_add = 'buttons_add';
   static const buttons_remove = 'buttons_remove';
+  static const buttons_confirm = 'buttons_confirm';
   static const buttons_save = 'buttons_save';
   static const buttons_edit = 'buttons_edit';
   static const buttons_details = 'buttons_details';
@@ -46,14 +47,64 @@ class LocaleKeys {
   static const labels_operation = 'labels_operation';
   static const labels_installed_versions = 'labels_installed_versions';
   static const labels_versions = 'labels_versions';
+  static const labels_version = 'labels_version';
   static const labels_global = 'labels_global';
   static const labels_env_variables = 'labels_env_variables';
   static const labels_switch_version = 'labels_switch_version';
   static const labels_donwload_version = 'labels_donwload_version';
   static const labels_how_to_configure = 'labels_how_to_configure';
   static const labels_unix_time_stamp = 'labels_unix_time_stamp';
+  static const labels_unix_time_stmap_desc = 'labels_unix_time_stmap_desc';
+  static const labels_flutter_icons = 'labels_flutter_icons';
+  static const labels_flutter_icons_desc = 'labels_flutter_icons_desc';
+  static const labels_json_format = 'labels_json_format';
+  static const labels_json_format_desc = 'labels_json_format_desc';
+  static const labels_settings_general = 'labels_settings_general';
+  static const labels_settings_fvm = 'labels_settings_fvm';
+  static const labels_settings_flutter = 'labels_settings_flutter';
+  static const labels_settings_theme = 'labels_settings_theme';
+  static const labels_settings_system = 'labels_settings_system';
+  static const labels_settings_dark = 'labels_settings_dark';
+  static const labels_settings_light = 'labels_settings_light';
+  static const labels_settings_ideSelection = 'labels_settings_ideSelection';
+  static const labels_settings_language = 'labels_settings_language';
+  static const labels_settings_resetToDefaultSettings =
+      'labels_settings_resetToDefaultSettings';
+  static const labels_settings_reset = 'labels_settings_reset';
+  static const labels_settings_selectAThemeOrSwitchAccordingToSystemSettings =
+      'labels_settings_selectAThemeOrSwitchAccordingToSystemSettings';
+  static const labels_settings_whatIdeDoYouWantToOpenYourProjectsWith =
+      'labels_settings_whatIdeDoYouWantToOpenYourProjectsWith';
+  static const labels_settings_skipSetupFlutterOnInstall =
+      'labels_settings_skipSetupFlutterOnInstall';
+  static const labels_settings_thisWillOnlyCloneFlutterAndNotInstall =
+      'labels_settings_thisWillOnlyCloneFlutterAndNotInstall';
+  static const labels_settings_dependenciesAfterANewVersionIsInstalled =
+      'labels_settings_dependenciesAfterANewVersionIsInstalled';
+  static const labels_settings_platforms = 'labels_settings_platforms';
+  static const labels_settings_web = 'labels_settings_web';
+  static const labels_settings_flutterSDKGlobalDescription =
+      'labels_settings_flutterSDKGlobalDescription';
+  static const labels_settings_analyticsCrashReporting =
+      'labels_settings_analyticsCrashReporting';
+  static const labels_settings_analyticsCrashReportSubtitle =
+      'labels_settings_analyticsCrashReportSubtitle';
+  static const labels_common_stableChannelDescription =
+      'labels_common_stableChannelDescription';
+  static const labels_common_betaChannelDescription =
+      'labels_common_betaChannelDescription';
+  static const labels_common_devChannelDescription =
+      'labels_common_devChannelDescription';
+  static const labels_common_masterChannelDescription =
+      'labels_common_masterChannelDescription';
   static const tips_not_a_flutter_project = 'tips_not_a_flutter_project';
   static const tips_removing = 'tips_removing';
+  static const tips_settings_areYouSureYouWantToResetSettings =
+      'tips_settings_areYouSureYouWantToResetSettings';
+  static const tips_settings_thisWillOnlyResetSidekickSpecificPreferences =
+      'tips_settings_thisWillOnlyResetSidekickSpecificPreferences';
+  static const languages_en_US = 'languages_en_US';
+  static const languages_zh_CN = 'languages_zh_CN';
 }
 
 class Locales {
@@ -85,6 +136,7 @@ class Locales {
     'buttons_select_version': 'Select version',
     'buttons_add': 'Add',
     'buttons_remove': 'Remove',
+    'buttons_confirm': 'Confirm',
     'buttons_save': 'Save',
     'buttons_edit': 'Edit',
     'buttons_details': 'Details',
@@ -110,14 +162,62 @@ class Locales {
     'labels_operation': 'Operation',
     'labels_installed_versions': 'Installed Versions',
     'labels_versions': 'Versions',
+    'labels_version': 'Version',
     'labels_global': 'Global',
     'labels_env_variables': 'Env Variables',
     'labels_switch_version': 'Switch version',
     'labels_donwload_version': 'Donwload Version',
     'labels_how_to_configure': 'How to configure ?',
-    'labels_unix_time_stamp': 'Unix time stamp',
+    'labels_unix_time_stamp': 'Unix Time Stamp',
+    'labels_unix_time_stmap_desc': 'unix time stamp convert utility',
+    'labels_flutter_icons': 'Flutter Icons',
+    'labels_flutter_icons_desc': 'flutter icons convert utility',
+    'labels_json_format': 'JSON Format',
+    'labels_json_format_desc': 'json format convert utility',
+    'labels_settings_general': 'General',
+    'labels_settings_fvm': 'FVM',
+    'labels_settings_flutter': 'Flutter',
+    'labels_settings_theme': 'Theme',
+    'labels_settings_system': 'System',
+    'labels_settings_dark': 'Dark',
+    'labels_settings_light': 'Light',
+    'labels_settings_ideSelection': 'IDE Selection',
+    'labels_settings_language': 'Language',
+    'labels_settings_resetToDefaultSettings': 'Reset to Default Settings',
+    'labels_settings_reset': 'Reset',
+    'labels_settings_selectAThemeOrSwitchAccordingToSystemSettings':
+        'Select a theme or switch according to system settings',
+    'labels_settings_whatIdeDoYouWantToOpenYourProjectsWith':
+        'What IDE do you want to open your projects with?',
+    'labels_settings_skipSetupFlutterOnInstall':
+        'Skip setup flutter on install',
+    'labels_settings_thisWillOnlyCloneFlutterAndNotInstall':
+        'This will only clone flutter and not install',
+    'labels_settings_dependenciesAfterANewVersionIsInstalled':
+        'Dependencies after a new version is installed',
+    'labels_settings_platforms': 'Platforms',
+    'labels_settings_web': 'Web',
+    'labels_settings_flutterSDKGlobalDescription':
+        'A flutter sdk version must be set as global to access the flutter settings',
+    'labels_settings_analyticsCrashReporting': 'Analytics & crash reporting',
+    'labels_settings_analyticsCrashReportSubtitle':
+        'When a Flutter command crashes, an attempt is made to send a crash report to Google so that Google can contribute improvements to Flutter over time',
+    'labels_common_stableChannelDescription':
+        'We recommend that you use this channel for all production app releases. About once a quarter, a branch that has been stabilised to beta becomes our next stable branch and we create a stable version of that branch.',
+    'labels_common_betaChannelDescription':
+        'Branch created for a new beta release at the beginning of the month, usually the first Monday, by master. This will contain a branch for Dart, the engine and the framework.',
+    'labels_common_devChannelDescription':
+        'The last fully tested build. Usually working, but see "Bad builds" for a list of known "bad" Dev builds.',
+    'labels_common_masterChannelDescription':
+        'The latest tip-of-tree, absolutely latest cutting edge build. Usually functional, though sometimes we accidentally break things.',
     'tips_not_a_flutter_project': 'Not a flutter project',
     'tips_system_error': 'System error',
     'tips_removing': 'Removing...',
+    'tips_settings_areYouSureYouWantToResetSettings':
+        'Are you sure you want to reset settings?',
+    'tips_settings_thisWillOnlyResetSidekickSpecificPreferences':
+        'This will only reset Sidekick specific settings',
+    'languages_en_US': 'English',
+    'languages_zh_CN': 'Chinese',
   };
 }

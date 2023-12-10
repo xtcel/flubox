@@ -19,4 +19,10 @@ abstract class Routers {
 
   /// Unix时间戳转换
   static const String unixTimeConvertPage = '/unixTimeConvertPage';
+
+  /// 进制转换页面
+  static const String binaryConvertPage = '/binaryConvertPage';
+
+  /// flutter icons 页面
+  static const String flutterIconsPage = '/flutterIconsPage';
 }
