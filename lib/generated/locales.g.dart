@@ -13,11 +13,18 @@ class LocaleKeys {
   LocaleKeys._();
   static const buttons_setting = 'buttons_setting';
   static const buttons_cancel = 'buttons_cancel';
+  static const buttons_close = 'buttons_close';
   static const buttons_refresh = 'buttons_refresh';
   static const buttons_add_project = 'buttons_add_project';
-  static const labels_projects = 'labels_projects';
-  static const labels_tools = 'labels_tools';
-  static const labels_environment = 'labels_environment';
+  static const buttons_select_version = 'buttons_select_version';
+  static const buttons_add = 'buttons_add';
+  static const buttons_remove = 'buttons_remove';
+  static const buttons_confirm = 'buttons_confirm';
+  static const buttons_save = 'buttons_save';
+  static const buttons_edit = 'buttons_edit';
+  static const buttons_delete = 'buttons_delete';
+  static const buttons_details = 'buttons_details';
+  static const buttons_setAsGlobal = 'buttons_setAsGlobal';
   static const labels_wait = 'labels_wait';
   static const labels_pull_to_refresh = 'labels_pull_to_refresh';
   static const labels_release_to_refresh = 'labels_release_to_refresh';
@@ -27,16 +34,8 @@ class LocaleKeys {
   static const labels_no_more = 'labels_no_more';
   static const labels_no_data = 'labels_no_data';
   static const labels_loading = 'labels_loading';
-  static const tips_system_error = 'tips_system_error';
-  static const buttons_close = 'buttons_close';
-  static const buttons_select_version = 'buttons_select_version';
-  static const buttons_add = 'buttons_add';
-  static const buttons_remove = 'buttons_remove';
-  static const buttons_confirm = 'buttons_confirm';
-  static const buttons_save = 'buttons_save';
-  static const buttons_edit = 'buttons_edit';
-  static const buttons_details = 'buttons_details';
-  static const buttons_setAsGlobal = 'buttons_setAsGlobal';
+  static const labels_projects = 'labels_projects';
+  static const labels_tools = 'labels_tools';
   static const labels_environments = 'labels_environments';
   static const labels_all_project = 'labels_all_project';
   static const labels_only_fvm = 'labels_only_fvm';
@@ -55,10 +54,16 @@ class LocaleKeys {
   static const labels_how_to_configure = 'labels_how_to_configure';
   static const labels_unix_time_stamp = 'labels_unix_time_stamp';
   static const labels_unix_time_stmap_desc = 'labels_unix_time_stmap_desc';
-  static const labels_flutter_icons = 'labels_flutter_icons';
-  static const labels_flutter_icons_desc = 'labels_flutter_icons_desc';
+  static const labels_binary_convert = 'labels_binary_convert';
+  static const labels_binary_convert_desc = 'labels_binary_convert_desc';
+  static const labels_material_design_icons = 'labels_material_design_icons';
+  static const labels_material_design_icons_desc =
+      'labels_material_design_icons_desc';
   static const labels_json_format = 'labels_json_format';
   static const labels_json_format_desc = 'labels_json_format_desc';
+  static const labels_stable = 'labels_stable';
+  static const labels_beta = 'labels_beta';
+  static const labels_dev = 'labels_dev';
   static const labels_settings_general = 'labels_settings_general';
   static const labels_settings_fvm = 'labels_settings_fvm';
   static const labels_settings_flutter = 'labels_settings_flutter';
@@ -83,6 +88,10 @@ class LocaleKeys {
       'labels_settings_dependenciesAfterANewVersionIsInstalled';
   static const labels_settings_platforms = 'labels_settings_platforms';
   static const labels_settings_web = 'labels_settings_web';
+  static const labels_settings_settingsHaveBeenSaved =
+      'labels_settings_settingsHaveBeenSaved';
+  static const labels_settings_couldNotSaveSettings =
+      'labels_settings_couldNotSaveSettings';
   static const labels_settings_flutterSDKGlobalDescription =
       'labels_settings_flutterSDKGlobalDescription';
   static const labels_settings_analyticsCrashReporting =
@@ -98,6 +107,7 @@ class LocaleKeys {
   static const labels_common_masterChannelDescription =
       'labels_common_masterChannelDescription';
   static const tips_not_a_flutter_project = 'tips_not_a_flutter_project';
+  static const tips_system_error = 'tips_system_error';
   static const tips_removing = 'tips_removing';
   static const tips_settings_areYouSureYouWantToResetSettings =
       'tips_settings_areYouSureYouWantToResetSettings';
@@ -111,21 +121,100 @@ class Locales {
   static const zh_CN = {
     'buttons_setting': '设置',
     'buttons_cancel': '取消',
+    'buttons_close': '关闭',
     'buttons_refresh': '刷新',
     'buttons_add_project': '添加项目',
-    'labels_projects': '项目',
-    'labels_tools': '工具',
-    'labels_environment': '环境',
+    'buttons_select_version': '选择版本',
+    'buttons_add': '添加',
+    'buttons_remove': '移除',
+    'buttons_confirm': '确认',
+    'buttons_save': '保存',
+    'buttons_edit': '编辑',
+    'buttons_delete': '删除',
+    'buttons_details': '详情',
+    'buttons_setAsGlobal': '设为全局',
     'labels_wait': '等待',
     'labels_pull_to_refresh': '下拉刷新',
-    'labels_release_to_refresh': '松开刷新',
+    'labels_release_to_refresh': '释放刷新',
     'labels_refreshing': '刷新中',
     'labels_refresh_completed': '刷新完成',
     'labels_refresh_failed': '刷新失败',
-    'labels_no_more': '没有更多了',
-    'labels_no_data': '暂无数据',
+    'labels_no_more': '没有更多',
+    'labels_no_data': '无数据',
     'labels_loading': '加载中',
+    'labels_projects': '项目',
+    'labels_tools': '工具',
+    'labels_environments': '环境',
+    'labels_all_project': '所有项目',
+    'labels_only_fvm': '仅 FVM',
+    'labels_search': '搜索',
+    'labels_variable_name': '变量名',
+    'labels_variable_value': '变量值',
+    'labels_status': '状态',
+    'labels_operation': '操作',
+    'labels_installed_versions': '已安装版本',
+    'labels_versions': '版本',
+    'labels_version': '版本',
+    'labels_global': '全局',
+    'labels_env_variables': '环境变量',
+    'labels_switch_version': '切换版本',
+    'labels_donwload_version': '下载版本',
+    'labels_how_to_configure': '如何配置？',
+    'labels_unix_time_stamp': 'Unix 时间戳',
+    'labels_unix_time_stmap_desc': 'Unix 时间戳转换工具',
+    'labels_binary_convert': '进制转换',
+    'labels_binary_convert_desc': '多种进制相互工具',
+    'labels_material_design_icons': 'Material Design 图标',
+    'labels_material_design_icons_desc': '预览 Material Design 图标',
+    'labels_json_format': 'JSON 格式',
+    'labels_json_format_desc': 'JSON 格式转换工具',
+    'labels_stable': '稳定版',
+    'labels_beta': '测试版',
+    'labels_dev': '开发版',
+    'labels_settings_general': '通用',
+    'labels_settings_fvm': 'FVM',
+    'labels_settings_flutter': 'Flutter',
+    'labels_settings_theme': '主题',
+    'labels_settings_system': '系统',
+    'labels_settings_dark': '暗黑',
+    'labels_settings_light': '明亮',
+    'labels_settings_ideSelection': 'IDE 选择',
+    'labels_settings_language': '语言',
+    'labels_settings_resetToDefaultSettings': '重置为默认设置',
+    'labels_settings_reset': '重置',
+    'labels_settings_selectAThemeOrSwitchAccordingToSystemSettings':
+        '选择主题或根据系统设置切换',
+    'labels_settings_whatIdeDoYouWantToOpenYourProjectsWith':
+        '你想用什么 IDE 打开你的项目？',
+    'labels_settings_skipSetupFlutterOnInstall': '安装时跳过设置 Flutter',
+    'labels_settings_thisWillOnlyCloneFlutterAndNotInstall':
+        '这只会克隆 Flutter 而不安装',
+    'labels_settings_dependenciesAfterANewVersionIsInstalled': '安装新版本后的依赖项',
+    'labels_settings_platforms': '平台',
+    'labels_settings_web': 'Web',
+    'labels_settings_settingsHaveBeenSaved': '设置已保存',
+    'labels_settings_couldNotSaveSettings': '无法保存设置',
+    'labels_settings_flutterSDKGlobalDescription':
+        '必须将一个 Flutter SDK 版本设置为全局，才能访问 Flutter 设置',
+    'labels_settings_analyticsCrashReporting': '分析和崩溃报告',
+    'labels_settings_analyticsCrashReportSubtitle':
+        '当 Flutter 命令崩溃时，会尝试向 Google 发送崩溃报告，以便 Google 随着时间的推移为 Flutter 做出改进',
+    'labels_common_stableChannelDescription':
+        '我们建议您使用此频道进行所有生产应用的发布。大约每季度一次，一个已稳定到 beta 的分支成为我们的下一个稳定分支，我们会创建该分支的稳定版本。',
+    'labels_common_betaChannelDescription':
+        '每月初，通常是第一个星期一，由 master 创建用于新 beta 版本的分支。这将包含 Dart、引擎和框架的分支。',
+    'labels_common_devChannelDescription':
+        '最后一个经过全面测试的构建。通常工作正常，但请参阅“坏构建”以获取已知的“坏”Dev 构建列表。',
+    'labels_common_masterChannelDescription':
+        '最新的 tip-of-tree，绝对最新的尖端构建。通常功能正常，尽管有时我们会意外地破坏东西。',
+    'tips_not_a_flutter_project': '不是 Flutter 项目',
     'tips_system_error': '系统错误',
+    'tips_removing': '正在移除...',
+    'tips_settings_areYouSureYouWantToResetSettings': '你确定要重置设置吗？',
+    'tips_settings_thisWillOnlyResetSidekickSpecificPreferences':
+        '这只会重置 Sidekick 特定的设置',
+    'languages_en_US': 'English',
+    'languages_zh_CN': '中文',
   };
   static const en_US = {
     'buttons_setting': 'Settings',
@@ -139,6 +228,7 @@ class Locales {
     'buttons_confirm': 'Confirm',
     'buttons_save': 'Save',
     'buttons_edit': 'Edit',
+    'buttons_delete': 'Delete',
     'buttons_details': 'Details',
     'buttons_setAsGlobal': 'Set as global',
     'labels_wait': 'Wait',
@@ -170,10 +260,16 @@ class Locales {
     'labels_how_to_configure': 'How to configure ?',
     'labels_unix_time_stamp': 'Unix Time Stamp',
     'labels_unix_time_stmap_desc': 'unix time stamp convert utility',
-    'labels_flutter_icons': 'Flutter Icons',
-    'labels_flutter_icons_desc': 'flutter icons convert utility',
+    'labels_binary_convert': 'Binary Convert',
+    'labels_binary_convert_desc':
+        'Tool for converting between multiple number systems',
+    'labels_material_design_icons': 'material design Icons',
+    'labels_material_design_icons_desc': 'preview material design icons',
     'labels_json_format': 'JSON Format',
     'labels_json_format_desc': 'json format convert utility',
+    'labels_stable': 'Stable',
+    'labels_beta': 'Beta',
+    'labels_dev': 'Dev',
     'labels_settings_general': 'General',
     'labels_settings_fvm': 'FVM',
     'labels_settings_flutter': 'Flutter',
@@ -197,6 +293,8 @@ class Locales {
         'Dependencies after a new version is installed',
     'labels_settings_platforms': 'Platforms',
     'labels_settings_web': 'Web',
+    'labels_settings_settingsHaveBeenSaved': 'The settings have been saved',
+    'labels_settings_couldNotSaveSettings': 'Settings could not be saved',
     'labels_settings_flutterSDKGlobalDescription':
         'A flutter sdk version must be set as global to access the flutter settings',
     'labels_settings_analyticsCrashReporting': 'Analytics & crash reporting',
@@ -218,6 +316,6 @@ class Locales {
     'tips_settings_thisWillOnlyResetSidekickSpecificPreferences':
         'This will only reset Sidekick specific settings',
     'languages_en_US': 'English',
-    'languages_zh_CN': 'Chinese',
+    'languages_zh_CN': '中文',
   };
 }

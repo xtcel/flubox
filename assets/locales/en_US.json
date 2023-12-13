@@ -11,9 +11,9 @@
     "confirm": "Confirm",
     "save": "Save",
     "edit": "Edit",
+    "delete": "Delete",
     "details": "Details",
     "setAsGlobal": "Set as global"
-
   },
   "labels": {
     "wait": "Wait",
@@ -45,10 +45,15 @@
     "how_to_configure": "How to configure ?",
     "unix_time_stamp": "Unix Time Stamp",
     "unix_time_stmap_desc": "unix time stamp convert utility",
-    "flutter_icons": "Flutter Icons",
-    "flutter_icons_desc": "flutter icons convert utility",
+    "binary_convert": "Binary Convert",
+    "binary_convert_desc": "Tool for converting between multiple number systems",
+    "material_design_icons": "material design Icons",
+    "material_design_icons_desc": "preview material design icons",
     "json_format": "JSON Format",
     "json_format_desc": "json format convert utility",
+    "stable": "Stable",
+    "beta": "Beta",
+    "dev": "Dev",
     "settings": {
       "general": "General",
       "fvm": "FVM",
@@ -68,6 +73,8 @@
       "dependenciesAfterANewVersionIsInstalled": "Dependencies after a new version is installed",
       "platforms": "Platforms",
       "web": "Web",
+      "settingsHaveBeenSaved": "The settings have been saved",
+      "couldNotSaveSettings": "Settings could not be saved",
       "flutterSDKGlobalDescription": "A flutter sdk version must be set as global to access the flutter settings",
       "analyticsCrashReporting": "Analytics & crash reporting",
       "analyticsCrashReportSubtitle": "When a Flutter command crashes, an attempt is made to send a crash report to Google so that Google can contribute improvements to Flutter over time"
@@ -90,6 +97,6 @@
   },
   "languages": {
     "en_US": "English",
-    "zh_CN": "Chinese"
+    "zh_CN": "中文"
   }
 }

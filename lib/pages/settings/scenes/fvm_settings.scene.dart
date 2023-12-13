@@ -25,8 +25,8 @@ class FvmSettingsScene extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: ListView(
         children: [
-          Text('FVM', style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 20),
+          // Text('FVM', style: Theme.of(context).textTheme.titleLarge),
+          // const SizedBox(height: 20),
           SwitchListTile(
             title: Text(
               LocaleKeys.labels_settings_skipSetupFlutterOnInstall.tr,

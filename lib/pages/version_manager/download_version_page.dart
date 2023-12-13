@@ -58,6 +58,7 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(top: 10, bottom: 20),
       padding: const EdgeInsets.all(20),
@@ -72,17 +73,17 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
                   PopupMenuButton<Channel>(
                       itemBuilder: (BuildContext context) {
                         return [
-                          const PopupMenuItem(
+                          PopupMenuItem(
                             value: Channel.stable,
-                            child: Text("stable"),
+                            child: Text(LocaleKeys.labels_stable.tr),
                           ),
-                          const PopupMenuItem(
-                            value: Channel.dev,
-                            child: Text("dev"),
-                          ),
-                          const PopupMenuItem(
+                          PopupMenuItem(
                             value: Channel.beta,
-                            child: Text("beta"),
+                            child: Text(LocaleKeys.labels_beta.tr),
+                          ),
+                          PopupMenuItem(
+                            value: Channel.dev,
+                            child: Text(LocaleKeys.labels_dev.tr),
                           ),
                         ];
                       },
@@ -99,15 +100,15 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
                       child: Row(
                         children: [
                           Text(
-                            _selectedChannel.name.tr,
-                            style: const TextStyle(
-                                color: Color(0xFF7D8DA6),
+                            "labels_${_selectedChannel.name}".tr,
+                            style: TextStyle(
+                                color: theme.primaryColor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w300),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.keyboard_arrow_down_rounded,
-                            color: Color(0xFF7D8DA6),
+                            color: theme.primaryColor,
                             size: 24,
                           ),
                         ],
@@ -115,6 +116,9 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
                 ],
               ),
             ],
+          ),
+          const SizedBox(
+            height: 15,
           ),
           Expanded(
             child: ListView.separated(
@@ -144,7 +148,51 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
                 return const Divider();
               },
             ),
-          )
+          ),
+          // TODO: 下载进度
+          // SliverAppBar(
+          //   pinned: true,
+          //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          //   bottom: const PreferredSize(
+          //     preferredSize: Size.fromHeight(1),
+          //     child: Divider(height: 0),
+          //   ),
+          //   automaticallyImplyLeading: false,
+          //   // actions: [Container()],
+          //   title: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Row(
+          //         children: [
+          //           Heading(
+          //             context.i18n('modules:releases.versions'),
+          //           ),
+          //           const SizedBox(width: 10),
+          //           Chip(label: Text(versions.length.toString())),
+          //         ],
+          //       ),
+          //       DropdownButton<String>(
+          //         value: filter.state.name,
+          //         icon: const Icon(Icons.filter_list),
+          //         underline: Container(),
+          //         items: Filter.values.map((Filter filter) {
+          //           final text = filter != Filter.all
+          //               ? filter.name.capitalize()
+          //               : context.i18n('modules:releases.all');
+
+          //           return DropdownMenuItem(
+          //             value: filter.name,
+          //             child: Text(text),
+          //           );
+          //         }).toList(),
+          //         onChanged: (value) {
+          //           filter.state = filterFromName(value!);
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
@@ -217,43 +265,3 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
     }
   }
 }
-
-                  // MenuAnchor(
-                  //   menuChildren: const [
-                  //     MenuItemButton(child: Text("dev")),
-                  //     MenuItemButton(child: Text("beta")),
-                  //     MenuItemButton(child: Text("stable")),
-                  //   ],
-                  //   builder: (BuildContext context, MenuController controller,
-                  //       Widget? child) {
-                  //     return TextButton(
-                  //       // focusNode: _buttonFocusNode,
-                  //       onPressed: () {
-                  //         if (controller.isOpen) {
-                  //           controller.close();
-                  //         } else {
-                  //           controller.open();
-                  //         }
-                  //       },
-                  //       child: const Text('OPEN MENU'),
-                  //     );
-                  //   },
-                  // builder: (context, controller, child) {
-                  //   return Container(
-                  //     width: 200,
-                  //     height: 200,
-                  //     color: Colors.white,
-                  //     child: ListView.builder(
-                  //       itemCount: 10,
-                  //       itemBuilder: (context, index) {
-                  //         return ListTile(
-                  //           title: Text("item $index"),
-                  //           onTap: () {
-                  //             controller.hide();
-                  //           },
-                  //         );
-                  //       },
-                  //     ),
-                  //   );
-                  // },
-                  // )

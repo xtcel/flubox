@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../utils/package_info_util.dart';
 import '../settings.dto.dart';
 import '../settings.utils.dart';
+import '../settings_controller.dart';
 
 /// Settings section general
 class SettingsSectionGeneral extends StatelessWidget {
@@ -63,23 +64,25 @@ class SettingsSectionGeneral extends StatelessWidget {
 
     // 获取版本号
     // final packageVersion = await PackageInfo.fromPlatform().version;
+    final SettingsController settingsController =
+        Get.find<SettingsController>();
 
     return Container(
       padding: const EdgeInsets.only(top: 20),
       child: ListView(
         children: [
-          Text(LocaleKeys.labels_settings_general.tr,
-              style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 20),
+          // Text(LocaleKeys.labels_settings_general.tr,
+          //     style: Theme.of(context).textTheme.titleLarge),
+          // const SizedBox(height: 20),
           ListTile(
             title: Text(LocaleKeys.labels_settings_theme.tr),
             subtitle: Text(LocaleKeys
                 .labels_settings_selectAThemeOrSwitchAccordingToSystemSettings
                 .tr),
-            trailing: DropdownButton(
+            trailing: DropdownButton<String>(
               underline: Container(),
               isDense: true,
-              value: settings.sidekick.themeMode.toString(),
+              value: settings.sidekick.themeMode,
               items: [
                 DropdownMenuItem(
                   value: SettingsThemeMode.system,
@@ -102,6 +105,7 @@ class SettingsSectionGeneral extends StatelessWidget {
               ],
               onChanged: (themeMode) async {
                 settings.sidekick.themeMode = themeMode as String;
+                settingsController.changeTheme(themeMode);
                 onSave();
               },
             ),
@@ -114,8 +118,6 @@ class SettingsSectionGeneral extends StatelessWidget {
             subtitle: Text(
               LocaleKeys
                   .labels_settings_whatIdeDoYouWantToOpenYourProjectsWith.tr,
-              // context.i18n(
-              //     'modules:settings.scenes.whatIdeDoYouWantToOpenYourProjectsWith'),
             ),
             trailing: DropdownButton(
               underline: Container(),
@@ -157,24 +159,26 @@ class SettingsSectionGeneral extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            title: Text(LocaleKeys.labels_settings_language.tr
-                // context.i18n('modules:settings.scenes.language')
-                ),
+            title: Text(LocaleKeys.labels_settings_language.tr),
             trailing: DropdownButton<Locale>(
               underline: Container(),
               isDense: true,
-              value: settings.sidekick.locale ?? Get.deviceLocale,
+              value: settings.sidekick.locale, // ?? Get.deviceLocale
               items: AppTranslation.translations.keys.map((localeKey) {
-                final locale = Locale(localeKey);
+                final languageCode = localeKey.split('_').first;
+                final countryCode = localeKey.split('_').last;
+
+                final locale = Locale(languageCode, countryCode);
                 return DropdownMenuItem(
                   value: locale,
                   child: Text(
-                    "languages_$key".tr,
+                    "languages_$localeKey".tr,
                   ),
                 );
               }).toList(),
               onChanged: (locale) async {
                 settings.sidekick.locale = locale;
+                Get.updateLocale(locale!);
                 onSave();
               },
             ),

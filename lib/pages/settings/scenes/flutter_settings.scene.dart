@@ -15,13 +15,15 @@ class SettingsSectionFlutter extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return SettingsSectionFlutterState();
+    return SettingsSectionFlutterState(settings: settings);
   }
 }
 
 class SettingsSectionFlutterState extends State<StatefulWidget> {
+  SettingsSectionFlutterState({required this.settings});
+
   /// Settings
-  late AllSettings settings;
+  final AllSettings settings;
   bool fvmFlutterActivated = false;
 
   @override
@@ -38,15 +40,14 @@ class SettingsSectionFlutterState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     // final releases = ref.watch(releasesStateProvider);
-
     // final deactivate = !releases.hasGlobal;
 
     return Container(
       padding: const EdgeInsets.only(top: 20),
       child: ListView(
         children: [
-          Text('Flutter', style: Theme.of(context).textTheme.titleLarge),
-          const SizedBox(height: 20),
+          // Text('Flutter', style: Theme.of(context).textTheme.titleLarge),
+          // const SizedBox(height: 20),
           fvmFlutterActivated
               ? Container()
               : Column(

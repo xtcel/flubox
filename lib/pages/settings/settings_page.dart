@@ -1,6 +1,7 @@
 // 设置页面
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ import 'scenes/fvm_settings.scene.dart';
 import 'scenes/general_settings.scene.dart';
 import 'settings.dto.dart';
 import 'settings.service.dart';
+import 'settings_controller.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -21,6 +23,8 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage>
     with TickerProviderStateMixin {
+  final SettingsController settingsController = Get.put(SettingsController());
+
   TabController? _tabController;
 
   final List<Tab> tabs = <Tab>[
@@ -76,6 +80,7 @@ class _SettingsPageState extends State<SettingsPage>
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
               height: 20,
@@ -85,44 +90,61 @@ class _SettingsPageState extends State<SettingsPage>
                 Text('设置', style: Theme.of(context).textTheme.titleMedium)
               ],
             ),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 2.0,
-                  child: ColoredTabBar(
-                    color: theme.scaffoldBackgroundColor,
-                    tabBar: TabBar(
-                        tabs: tabs,
-                        controller: _tabController,
-                        isScrollable: false,
-                        automaticIndicatorColorAdjustment: false,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        indicatorColor: theme.primaryColor,
-                        labelColor: theme.primaryColor,
-                        unselectedLabelColor:
-                            theme.textTheme.titleMedium?.color,
-                        onTap: (index) {}),
-                  ),
+                  child: TabBar(
+                      tabs: tabs,
+                      controller: _tabController,
+                      isScrollable: false,
+                      automaticIndicatorColorAdjustment: false,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: theme.primaryColor,
+                      labelColor: theme.primaryColor,
+                      unselectedLabelColor: theme.textTheme.titleMedium?.color,
+                      onTap: (index) {}),
                 ),
               ],
             ),
-            const Divider(),
-            TabBarView(
-              controller: _tabController,
-              children: [
-                SettingsSectionGeneral(settings, onSave),
-                FvmSettingsScene(settings, onSave),
-                SettingsSectionFlutter(settings, onSave),
-              ],
-            )
+            const Divider(
+              thickness: 1,
+              height: 1,
+            ),
+            GetBuilder<SettingsController>(builder: (controller) {
+              return Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    SettingsSectionGeneral(
+                        controller.state.settings, handleSave),
+                    FvmSettingsScene(controller.state.settings, handleSave),
+                    SettingsSectionFlutter(
+                        controller.state.settings, handleSave),
+                  ],
+                ),
+              );
+            }),
           ],
         ),
       ),
     );
   }
 
-  void onSave() {}
+  Future<void> handleSave() async {
+    final savedMessage = LocaleKeys.labels_settings_settingsHaveBeenSaved.tr;
+    final errorMessage = LocaleKeys.labels_settings_couldNotSaveSettings.tr;
+    try {
+      await settingsController.save(settings);
+      EasyLoading.showSuccess(savedMessage);
+    } on Exception catch (e) {
+      EasyLoading.showError(errorMessage);
+      // notifyError(errorMessage);
+      EasyLoading.showError(e.toString());
+    }
+  }
 }
 
 class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {

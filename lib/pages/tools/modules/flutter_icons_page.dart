@@ -92,7 +92,10 @@ class _FlutterIconPageState extends State<FlutterIconPage> {
                         );
                       },
                     ),
-                    Text(iconName),
+                    Text(
+                      iconName,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 );
               },
@@ -100,27 +103,6 @@ class _FlutterIconPageState extends State<FlutterIconPage> {
           ),
         ]),
       ),
-      // GridView.count(
-      //   crossAxisCount: 10,
-      //   children: filteredIconNames
-      //       .map((iconName) => TextButton(
-      //             child: Column(
-      //               children: [
-      //                 Icon(MdiIcons.fromString(iconName)),
-      //                 Text(iconName),
-      //               ],
-      //             ),
-      //             onPressed: () {
-      //               Clipboard.setData(ClipboardData(text: iconName.toString()));
-      //               ScaffoldMessenger.of(context).showSnackBar(
-      //                 SnackBar(
-      //                     content: Text(
-      //                         'Copied ${iconName.toString()} to clipboard')),
-      //               );
-      //             },
-      //           ))
-      //       .toList(),
-      // ),
     );
   }
 }

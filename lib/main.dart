@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bruno/bruno.dart';
+import 'package:flubox/pages/initial/bindings/initial_binding.dart';
 import 'package:flubox/pages/projects/projects_page.dart';
 import 'package:flubox/router/app_routers.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +21,8 @@ import 'pages/projects/project.dto.dart';
 import 'pages/projects/projects.service.dart';
 import 'pages/settings/settings.dto.dart';
 import 'pages/settings/settings.service.dart';
+import 'pages/settings/settings.utils.dart';
+import 'pages/settings/settings_controller.dart';
 import 'utils/ChineseCupertinoLocalizations.dart';
 import 'router/app_pages.dart';
 import 'pages/404/unknown_route_page.dart';
@@ -158,6 +161,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final SettingsController settingsController = Get.put(SettingsController());
+
     final settings = SettingsService.read();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -172,10 +177,12 @@ class _MyHomePageState extends State<MyHomePage> {
             theme: FlexThemeData.light(scheme: FlexScheme.hippieBlue),
             // The Mandy red, dark theme.
             darkTheme: FlexThemeData.dark(scheme: FlexScheme.hippieBlue),
-            themeMode: ThemeMode.system,
+            themeMode: settingsController
+                .themeStateFromHiveSettingBox(), // getThemeMode(settings.themeMode),
             // 去掉模拟器调试debug标识
             debugShowCheckedModeBanner: false,
             initialRoute: Routers.splashScreen,
+            initialBinding: InitialBinding(),
             getPages: AppPages.getPages,
             unknownRoute: GetPage(
                 name: '/notfound', page: () => const UnknownRoutePage()),

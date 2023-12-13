@@ -65,24 +65,22 @@ class _VersionManagerState extends State<EnvironmentsPage>
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 20),
-          //   child: Row(
-          //     children: [
-          //       Text(LocaleKeys.labels_environments.tr),
-          //     ],
-          //   ),
-          // ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: _buildTopNavigationBar(navIndex),
+          Row(
+            children: [
+              Text(LocaleKeys.labels_environments.tr,
+                  style: Theme.of(context).textTheme.titleMedium)
+            ],
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          _buildTopNavigationBar(navIndex),
           Divider(
             height: 1,
             thickness: 1,
@@ -104,15 +102,21 @@ class _VersionManagerState extends State<EnvironmentsPage>
   }
 
   Widget _buildTopNavigationBar(int index) {
-    return TabBar(
-        tabs: tabs,
-        controller: _tabController,
-        isScrollable: true,
-        automaticIndicatorColorAdjustment: false,
-        indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
-        indicatorSize: TabBarIndicatorSize.label,
-        labelColor: Theme.of(context).tabBarTheme.labelColor,
-        onTap: (index) => _onTabTap(index));
+    final theme = Theme.of(context);
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      SizedBox(
+          width: MediaQuery.of(context).size.width / 2.0,
+          child: TabBar(
+              tabs: tabs,
+              controller: _tabController,
+              isScrollable: false,
+              automaticIndicatorColorAdjustment: false,
+              indicatorColor: theme.primaryColor,
+              labelColor: theme.primaryColor,
+              unselectedLabelColor: theme.textTheme.titleMedium?.color,
+              indicatorSize: TabBarIndicatorSize.label,
+              onTap: (index) => _onTabTap(index)))
+    ]);
   }
 
   void _onTabTap(int index) {

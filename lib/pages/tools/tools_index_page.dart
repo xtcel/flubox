@@ -1,6 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../generated/locales.g.dart';
 import '../../router/app_routers.dart';
@@ -50,9 +51,9 @@ class _ToolsIndexPageState extends State<ToolsIndexPage> {
                     },
                   ),
                   ToolsMenuItem(
-                    icon: Icons.blender_outlined,
-                    title: LocaleKeys.labels_unix_time_stamp.tr,
-                    summary: LocaleKeys.labels_unix_time_stmap_desc.tr,
+                    icon: MdiIcons.counter,
+                    title: LocaleKeys.labels_binary_convert.tr,
+                    summary: LocaleKeys.labels_binary_convert_desc.tr,
                     onTap: () {
                       Get.toNamed(Routers.binaryConvertPage);
                     },
@@ -60,8 +61,8 @@ class _ToolsIndexPageState extends State<ToolsIndexPage> {
                   // Flutter 图标库
                   ToolsMenuItem(
                     icon: Icons.flutter_dash,
-                    title: LocaleKeys.labels_flutter_icons.tr,
-                    summary: LocaleKeys.labels_flutter_icons_desc.tr,
+                    title: LocaleKeys.labels_material_design_icons.tr,
+                    summary: LocaleKeys.labels_material_design_icons_desc.tr,
                     onTap: () {
                       Get.toNamed(Routers.flutterIconsPage);
                     },
