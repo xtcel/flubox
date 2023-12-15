@@ -8,39 +8,39 @@ import 'settings.utils.dart';
 
 /// All Settings
 class AllSettings {
-  SidekickSettings sidekick;
+  FluboxSettings flubox;
   FvmSettings fvm;
   FlutterSettings flutter;
 
   AllSettings({
     required this.fvm,
     required this.flutter,
-    required this.sidekick,
+    required this.flubox,
   });
 
   static AllSettings create({
-    SidekickSettings? sidekick,
+    FluboxSettings? sidekick,
     FvmSettings? fvm,
     FlutterSettings? flutter,
   }) {
     return AllSettings(
       fvm: fvm ?? FvmSettings(),
       flutter: flutter ?? FlutterSettings(),
-      sidekick: sidekick ?? SidekickSettings(),
+      flubox: sidekick ?? FluboxSettings(),
     );
   }
 
   AllSettings copy() => AllSettings(
-        sidekick: SidekickSettings.fromJson(sidekick.toJson()),
+        flubox: FluboxSettings.fromJson(flubox.toJson()),
         fvm: FvmSettings.fromJson(fvm.toJson()),
         flutter: FlutterSettings.fromMap(flutter.toMap()),
       );
 }
 
 /// Sidekick settings
-class SidekickSettings {
+class FluboxSettings {
   /// Constructor
-  SidekickSettings({
+  FluboxSettings({
     this.onlyProjectsWithFvm = false,
     this.projectPaths = const [],
     this.themeMode = SettingsThemeMode.system,
@@ -68,10 +68,10 @@ class SidekickSettings {
   String? ide;
   String? customIdeLocation;
 
-  factory SidekickSettings.fromJson(String str) =>
-      SidekickSettings.fromMap(json.decode(str));
+  factory FluboxSettings.fromJson(String str) =>
+      FluboxSettings.fromMap(json.decode(str));
 
-  factory SidekickSettings.fromMap(Map<String, dynamic> json) {
+  factory FluboxSettings.fromMap(Map<String, dynamic> json) {
     final language = json['i18Locale'];
     final locale = language != null
         ? Locale.fromSubtags(
@@ -79,7 +79,7 @@ class SidekickSettings {
             countryCode: language.split('-')[1])
         : null;
 
-    return SidekickSettings(
+    return FluboxSettings(
       projectPaths: (json['projectPaths'] as List<dynamic>).cast<String>(),
       onlyProjectsWithFvm: json['onlyProjectsWithFvm'] as bool? ?? false,
       themeMode: json['themeMode'] as String? ?? SettingsThemeMode.system,
@@ -105,19 +105,19 @@ class SidekickSettings {
   }
 }
 
-class SidekickSettingsAdapter extends TypeAdapter<SidekickSettings> {
+class FluboxSettingsAdapter extends TypeAdapter<FluboxSettings> {
   @override
   int get typeId => 1; // this is unique, no other Adapter can have the same id.
 
   @override
-  SidekickSettings read(BinaryReader reader) {
+  FluboxSettings read(BinaryReader reader) {
     // FIXME: Check why subtype does not match
     final value = Map<String, dynamic>.from(reader.readMap());
-    return SidekickSettings.fromMap(value);
+    return FluboxSettings.fromMap(value);
   }
 
   @override
-  void write(BinaryWriter writer, SidekickSettings obj) {
+  void write(BinaryWriter writer, FluboxSettings obj) {
     writer.writeMap(obj.toMap());
   }
 }

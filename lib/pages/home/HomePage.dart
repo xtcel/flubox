@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:flubox/generated/locales.g.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../projects/projects_page.dart';
 import '../settings/settings_page.dart';
 import '../tools/tools_index_page.dart';
 import '../version_manager/environments_page.dart';
+import 'widgets/app_bottom_bar.dart';
 
 /// 首页
 
@@ -35,31 +38,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: const AppBottomBar(),
         body: Row(children: [
-      ValueListenableBuilder<int>(
-        valueListenable: _selectIndex,
-        builder: (_, index, __) => LeftNavigation(
-          selectedIndex: index,
-          extended: extended,
-          onLeadingButton: () {
-            extended = !extended;
-            setState(() {});
-          },
-          onDestinationSelected: _onDestinationSelected,
-        ),
-      ),
-      Expanded(
-          child: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _controller,
-        children: const [
-          ProjectsPage(),
-          EnvironmentsPage(),
-          ToolsIndexPage(),
-          SettingsPage(),
-        ],
-      )),
-    ]));
+          ValueListenableBuilder<int>(
+            valueListenable: _selectIndex,
+            builder: (_, index, __) => LeftNavigation(
+              selectedIndex: index,
+              extended: extended,
+              onLeadingButton: () {
+                extended = !extended;
+                setState(() {});
+              },
+              onDestinationSelected: _onDestinationSelected,
+            ),
+          ),
+          Expanded(
+              child: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _controller,
+            children: const [
+              ProjectsPage(),
+              EnvironmentsPage(),
+              ToolsIndexPage(),
+              SettingsPage(),
+            ],
+          )),
+        ]));
   }
 
   void _onDestinationSelected(int value) {
@@ -91,6 +95,21 @@ class LeftNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<NavigationRailDestination> destinations = [
+      NavigationRailDestination(
+          icon: const Icon(Icons.apps_rounded),
+          label: Text(LocaleKeys.labels_projects.tr)),
+      NavigationRailDestination(
+          icon: const Icon(Icons.settings_suggest_rounded),
+          label: Text(LocaleKeys.labels_environments.tr)),
+      NavigationRailDestination(
+          icon: const Icon(Icons.construction_rounded),
+          label: Text(LocaleKeys.labels_tools.tr)),
+      NavigationRailDestination(
+          icon: const Icon(Icons.settings),
+          label: Text(LocaleKeys.buttons_settings.tr))
+    ];
+
     return NavigationRail(
       leading: loginWidget(),
       extended: extended,
@@ -102,17 +121,6 @@ class LeftNavigation extends StatelessWidget {
       selectedIndex: selectedIndex,
     );
   }
-
-  final List<NavigationRailDestination> destinations = const [
-    NavigationRailDestination(
-        icon: Icon(Icons.apps_rounded), label: Text("Projects")),
-    NavigationRailDestination(
-        icon: Icon(Icons.settings_suggest_rounded), label: Text("Evn")),
-    NavigationRailDestination(
-        icon: Icon(Icons.construction_rounded), label: Text("Tools")),
-    NavigationRailDestination(
-        icon: Icon(Icons.settings), label: Text("Settings"))
-  ];
 
   Widget loginWidget() {
     return const Align(

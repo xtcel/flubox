@@ -261,14 +261,14 @@ class _EnvConfigPageState extends State<EnvConfigPage> {
   Widget getStatusWidget(String? value, String expectValue) {
     if (value != null && value != "") {
       // 正常
-      return Text("已配置",
+      return Text(LocaleKeys.labels_configured.tr,
           style: Theme.of(Get.context!).textTheme.bodyMedium?.copyWith(
               color:
                   Theme.of(Get.context!).extension<MyColors>()?.successColor));
     } else {
       // 未设置
       return Text(
-        "未设置",
+        LocaleKeys.labels_unconfigured.tr,
         style: Theme.of(Get.context!).textTheme.bodyMedium?.copyWith(
             color: Theme.of(Get.context!).extension<MyColors>()?.warningColor),
       );

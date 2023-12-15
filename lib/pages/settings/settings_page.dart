@@ -64,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage>
     final flutterSettings = await FlutterConfigService.getFlutterConfig();
     settings = AllSettings(
       // Set state
-      sidekick: sidekickSettings,
+      flubox: sidekickSettings,
       fvm: fvmSettings,
       flutter: FlutterSettings.fromMap(flutterSettings),
     );

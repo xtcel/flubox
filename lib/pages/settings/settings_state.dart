@@ -6,7 +6,5 @@ class SettingsState {
   late AllSettings settings;
   late AllSettings prevSettings;
 
-  SettingsState() {
-    // settingsHiveBox = Hive.box<SidekickSettings>(key);
-  }
+  SettingsState();
 }

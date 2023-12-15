@@ -11,7 +11,7 @@ class AppTranslation {
 
 class LocaleKeys {
   LocaleKeys._();
-  static const buttons_setting = 'buttons_setting';
+  static const buttons_settings = 'buttons_settings';
   static const buttons_cancel = 'buttons_cancel';
   static const buttons_close = 'buttons_close';
   static const buttons_refresh = 'buttons_refresh';
@@ -48,6 +48,8 @@ class LocaleKeys {
   static const labels_versions = 'labels_versions';
   static const labels_version = 'labels_version';
   static const labels_global = 'labels_global';
+  static const labels_configured = 'labels_configured';
+  static const labels_unconfigured = 'labels_unconfigured';
   static const labels_env_variables = 'labels_env_variables';
   static const labels_switch_version = 'labels_switch_version';
   static const labels_donwload_version = 'labels_donwload_version';
@@ -111,15 +113,15 @@ class LocaleKeys {
   static const tips_removing = 'tips_removing';
   static const tips_settings_areYouSureYouWantToResetSettings =
       'tips_settings_areYouSureYouWantToResetSettings';
-  static const tips_settings_thisWillOnlyResetSidekickSpecificPreferences =
-      'tips_settings_thisWillOnlyResetSidekickSpecificPreferences';
+  static const tips_settings_thisWillOnlyResetFluboxSpecificPreferences =
+      'tips_settings_thisWillOnlyResetFluboxSpecificPreferences';
   static const languages_en_US = 'languages_en_US';
   static const languages_zh_CN = 'languages_zh_CN';
 }
 
 class Locales {
   static const zh_CN = {
-    'buttons_setting': '设置',
+    'buttons_settings': '设置',
     'buttons_cancel': '取消',
     'buttons_close': '关闭',
     'buttons_refresh': '刷新',
@@ -156,6 +158,8 @@ class Locales {
     'labels_versions': '版本',
     'labels_version': '版本',
     'labels_global': '全局',
+    'labels_configured': '已配置',
+    'labels_unconfigured': '未配置',
     'labels_env_variables': '环境变量',
     'labels_switch_version': '切换版本',
     'labels_donwload_version': '下载版本',
@@ -163,7 +167,7 @@ class Locales {
     'labels_unix_time_stamp': 'Unix 时间戳',
     'labels_unix_time_stmap_desc': 'Unix 时间戳转换工具',
     'labels_binary_convert': '进制转换',
-    'labels_binary_convert_desc': '多种进制相互工具',
+    'labels_binary_convert_desc': '多种进制相互转换工具',
     'labels_material_design_icons': 'Material Design 图标',
     'labels_material_design_icons_desc': '预览 Material Design 图标',
     'labels_json_format': 'JSON 格式',
@@ -211,13 +215,13 @@ class Locales {
     'tips_system_error': '系统错误',
     'tips_removing': '正在移除...',
     'tips_settings_areYouSureYouWantToResetSettings': '你确定要重置设置吗？',
-    'tips_settings_thisWillOnlyResetSidekickSpecificPreferences':
-        '这只会重置 Sidekick 特定的设置',
+    'tips_settings_thisWillOnlyResetFluboxSpecificPreferences':
+        '这只会重置 Flubox 特定的设置',
     'languages_en_US': 'English',
     'languages_zh_CN': '中文',
   };
   static const en_US = {
-    'buttons_setting': 'Settings',
+    'buttons_settings': 'Settings',
     'buttons_cancel': 'Cancel',
     'buttons_close': 'Close',
     'buttons_refresh': 'Refresh',
@@ -242,7 +246,7 @@ class Locales {
     'labels_loading': 'Loading',
     'labels_projects': 'Projects',
     'labels_tools': 'Tools',
-    'labels_environments': 'Environments',
+    'labels_environments': 'Env',
     'labels_all_project': 'All project',
     'labels_only_fvm': 'Only FVM',
     'labels_search': 'Search',
@@ -254,6 +258,8 @@ class Locales {
     'labels_versions': 'Versions',
     'labels_version': 'Version',
     'labels_global': 'Global',
+    'labels_configured': 'Configured',
+    'labels_unconfigured': 'Unconfigured',
     'labels_env_variables': 'Env Variables',
     'labels_switch_version': 'Switch version',
     'labels_donwload_version': 'Donwload Version',
@@ -313,8 +319,8 @@ class Locales {
     'tips_removing': 'Removing...',
     'tips_settings_areYouSureYouWantToResetSettings':
         'Are you sure you want to reset settings?',
-    'tips_settings_thisWillOnlyResetSidekickSpecificPreferences':
-        'This will only reset Sidekick specific settings',
+    'tips_settings_thisWillOnlyResetFluboxSpecificPreferences':
+        'This will only reset Flubox specific settings',
     'languages_en_US': 'English',
     'languages_zh_CN': '中文',
   };

@@ -28,7 +28,7 @@ class SettingsController extends GetxController {
     final flutterSettings = await FlutterConfigService.getFlutterConfig();
     state.settings = AllSettings(
       // Set state
-      sidekick: sidekickSettings,
+      flubox: sidekickSettings,
       fvm: fvmSettings,
       flutter: FlutterSettings.fromMap(flutterSettings),
     );
@@ -37,7 +37,7 @@ class SettingsController extends GetxController {
   }
 
   ThemeMode themeStateFromHiveSettingBox() {
-    String themeModeString = state.settings.sidekick.themeMode;
+    String themeModeString = state.settings.flubox.themeMode;
     ThemeMode themeMode = getThemeMode(themeModeString);
 
     return themeMode;
@@ -50,7 +50,7 @@ class SettingsController extends GetxController {
       // Trigger refresh
       state.settings = state.settings.copy();
       await _checkFvmSettingsChanges(settings.fvm);
-      await _checkAppSettingsChanges(settings.sidekick);
+      await _checkAppSettingsChanges(settings.flubox);
       await _checkAnalyticsChanges(settings.flutter);
       // Set previous state only after success
       state.prevSettings = state.settings.copy();
@@ -62,8 +62,8 @@ class SettingsController extends GetxController {
     }
   }
 
-  Future<void> _checkAppSettingsChanges(SidekickSettings settings) async {
-    final changed = settings != state.prevSettings.sidekick;
+  Future<void> _checkAppSettingsChanges(FluboxSettings settings) async {
+    final changed = settings != state.prevSettings.flubox;
 
     // Save sidekick settings changed
     if (changed) {

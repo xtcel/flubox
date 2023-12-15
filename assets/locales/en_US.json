@@ -1,6 +1,6 @@
 {
   "buttons": {
-    "setting": "Settings",
+    "settings": "Settings",
     "cancel": "Cancel",
     "close": "Close",
     "refresh": "Refresh",
@@ -27,7 +27,7 @@
     "loading": "Loading",
     "projects": "Projects",
     "tools": "Tools",
-    "environments": "Environments",
+    "environments": "Env",
     "all_project": "All project",
     "only_fvm": "Only FVM",
     "search": "Search",
@@ -39,6 +39,8 @@
     "versions": "Versions",
     "version": "Version",
     "global": "Global",
+    "configured": "Configured",
+    "unconfigured": "Unconfigured",
     "env_variables": "Env Variables",
     "switch_version": "Switch version",
     "donwload_version": "Donwload Version",
@@ -92,7 +94,7 @@
     "removing" : "Removing...",
     "settings": {
       "areYouSureYouWantToResetSettings": "Are you sure you want to reset settings?",
-      "thisWillOnlyResetSidekickSpecificPreferences": "This will only reset Sidekick specific settings"
+      "thisWillOnlyResetFluboxSpecificPreferences": "This will only reset Flubox specific settings"
     }
   },
   "languages": {

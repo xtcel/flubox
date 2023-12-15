@@ -123,22 +123,27 @@ class ToolsMenuItem extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    summary,
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                ],
+              Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      summary,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

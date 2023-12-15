@@ -36,7 +36,7 @@ class SettingsSectionGeneral extends StatelessWidget {
               LocaleKeys.tips_settings_areYouSureYouWantToResetSettings.tr,
             ),
             content: Text(LocaleKeys
-                .tips_settings_thisWillOnlyResetSidekickSpecificPreferences.tr),
+                .tips_settings_thisWillOnlyResetFluboxSpecificPreferences.tr),
             buttonPadding: const EdgeInsets.all(15),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
@@ -44,15 +44,15 @@ class SettingsSectionGeneral extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text(LocaleKeys.buttons_cancel),
+                child: Text(LocaleKeys.buttons_cancel.tr),
               ),
               TextButton(
                 onPressed: () async {
                   Navigator.of(context).pop();
-                  settings.sidekick = SidekickSettings();
+                  settings.flubox = FluboxSettings();
+                  Get.changeThemeMode(ThemeMode.system);
+                  Get.updateLocale(const Locale("en", "US"));
                   onSave();
-                  // notify(context.i18n(
-                  //     'modules:settings.scenes.appSettingsHaveBeenReset'));
                 },
                 child: Text(LocaleKeys.buttons_confirm.tr),
               ),
@@ -82,7 +82,7 @@ class SettingsSectionGeneral extends StatelessWidget {
             trailing: DropdownButton<String>(
               underline: Container(),
               isDense: true,
-              value: settings.sidekick.themeMode,
+              value: settings.flubox.themeMode,
               items: [
                 DropdownMenuItem(
                   value: SettingsThemeMode.system,
@@ -104,7 +104,7 @@ class SettingsSectionGeneral extends StatelessWidget {
                 ),
               ],
               onChanged: (themeMode) async {
-                settings.sidekick.themeMode = themeMode as String;
+                settings.flubox.themeMode = themeMode as String;
                 settingsController.changeTheme(themeMode);
                 onSave();
               },
@@ -122,7 +122,7 @@ class SettingsSectionGeneral extends StatelessWidget {
             trailing: DropdownButton(
               underline: Container(),
               isDense: true,
-              value: settings.sidekick.ide ?? 'none',
+              value: settings.flubox.ide ?? 'none',
               items: [
                 const DropdownMenuItem(
                   value: 'none',
@@ -147,12 +147,12 @@ class SettingsSectionGeneral extends StatelessWidget {
                 if (val == "Custom") {
                   final file = await openFile();
                   if (file != null) {
-                    settings.sidekick.customIdeLocation = file.path;
+                    settings.flubox.customIdeLocation = file.path;
                   } else {
                     return;
                   }
                 }
-                settings.sidekick.ide = val == 'none' ? null : val as String;
+                settings.flubox.ide = val == 'none' ? null : val as String;
                 onSave();
               },
             ),
@@ -163,7 +163,7 @@ class SettingsSectionGeneral extends StatelessWidget {
             trailing: DropdownButton<Locale>(
               underline: Container(),
               isDense: true,
-              value: settings.sidekick.locale, // ?? Get.deviceLocale
+              value: settings.flubox.locale ?? const Locale("en", "US"),
               items: AppTranslation.translations.keys.map((localeKey) {
                 final languageCode = localeKey.split('_').first;
                 final countryCode = localeKey.split('_').last;
@@ -177,7 +177,7 @@ class SettingsSectionGeneral extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (locale) async {
-                settings.sidekick.locale = locale;
+                settings.flubox.locale = locale;
                 Get.updateLocale(locale!);
                 onSave();
               },

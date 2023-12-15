@@ -57,7 +57,7 @@ void realRunApp() async {
   Hive.init(hiveDir.absolute.path);
 
   Hive.registerAdapter(ProjectPathAdapter());
-  Hive.registerAdapter(SidekickSettingsAdapter());
+  Hive.registerAdapter(FluboxSettingsAdapter());
 
   try {
     await SettingsService.init();

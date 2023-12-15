@@ -1,3 +1,4 @@
+import 'package:flubox/pages/version_manager/controller/version_controller.dart';
 import 'package:flubox/theme/extension_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fvm/fvm.dart';
@@ -199,19 +200,22 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
   }
 
   Widget getOperationWidget(Release release) {
+    final theme = Theme.of(context);
+    final VersionController controller = Get.find<VersionController>();
     if (isInstalled(release)) {
       return IconButton(
         onPressed: null,
         icon: Icon(
           Icons.check_circle_outline_rounded,
           size: 24,
-          color: Theme.of(context).extension<MyColors>()?.successColor,
+          color: theme.colorScheme.primary,
         ),
       );
     } else {
       return IconButton(
           onPressed: () {
-            FVMClient.install(release.version);
+            controller.install(release);
+            // FVMClient.install(release.version);
           },
           icon: const Icon(
             Icons.download_rounded,

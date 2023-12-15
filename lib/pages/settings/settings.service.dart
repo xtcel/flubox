@@ -10,34 +10,34 @@ class SettingsService {
   static const key = 'settings_box';
 
   /// Storage box
-  static Box<SidekickSettings>? box;
+  static Box<FluboxSettings>? box;
 
   /// Initialize storage
   static Future<void> init() async {
-    box = await Hive.openBox<SidekickSettings>(key);
+    box = await Hive.openBox<FluboxSettings>(key);
   }
 
   /// Save sidekick settings
-  static Future<void> save(SidekickSettings settings) async {
-    await box?.put(SidekickSettings.key, settings);
+  static Future<void> save(FluboxSettings settings) async {
+    await box?.put(FluboxSettings.key, settings);
   }
 
   /// Read sidekick settings
-  static SidekickSettings read() {
+  static FluboxSettings read() {
     // Make sure its initialized
-    final settings = box?.get(SidekickSettings.key);
+    final settings = box?.get(FluboxSettings.key);
     if (settings != null) {
       return settings;
     } else {
-      return SidekickSettings();
+      return FluboxSettings();
     }
   }
 
   /// Reset settings
-  static Future<SidekickSettings> reset() async {
+  static Future<FluboxSettings> reset() async {
     /// Will set all AppSettings to default
-    final emptySettings = SidekickSettings();
-    await box?.put(SidekickSettings.key, emptySettings);
+    final emptySettings = FluboxSettings();
+    await box?.put(FluboxSettings.key, emptySettings);
     return emptySettings;
   }
 }

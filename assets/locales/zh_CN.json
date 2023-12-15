@@ -1,6 +1,6 @@
 {
   "buttons": {
-    "setting": "设置",
+    "settings": "设置",
     "cancel": "取消",
     "close": "关闭",
     "refresh": "刷新",
@@ -39,6 +39,8 @@
     "versions": "版本",
     "version": "版本",
     "global": "全局",
+    "configured": "已配置",
+    "unconfigured": "未配置",
     "env_variables": "环境变量",
     "switch_version": "切换版本",
     "donwload_version": "下载版本",
@@ -46,7 +48,7 @@
     "unix_time_stamp": "Unix 时间戳",
     "unix_time_stmap_desc": "Unix 时间戳转换工具",
     "binary_convert": "进制转换",
-    "binary_convert_desc": "多种进制相互工具",
+    "binary_convert_desc": "多种进制相互转换工具",
     "material_design_icons": "Material Design 图标",
     "material_design_icons_desc": "预览 Material Design 图标",
     "json_format": "JSON 格式",
@@ -92,7 +94,7 @@
     "removing" : "正在移除...",
     "settings": {
       "areYouSureYouWantToResetSettings": "你确定要重置设置吗？",
-      "thisWillOnlyResetSidekickSpecificPreferences": "这只会重置 Sidekick 特定的设置"
+      "thisWillOnlyResetFluboxSpecificPreferences": "这只会重置 Flubox 特定的设置"
     }
   },
   "languages": {
