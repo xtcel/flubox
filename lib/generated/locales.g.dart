@@ -192,8 +192,8 @@ class Locales {
         '你想用什么 IDE 打开你的项目？',
     'labels_settings_skipSetupFlutterOnInstall': '安装时跳过设置 Flutter',
     'labels_settings_thisWillOnlyCloneFlutterAndNotInstall':
-        '这只会克隆 Flutter 而不安装',
-    'labels_settings_dependenciesAfterANewVersionIsInstalled': '安装新版本后的依赖项',
+        '这将只克隆 Flutter，但不安装它的依赖，',
+    'labels_settings_dependenciesAfterANewVersionIsInstalled': '在安装新版本后。',
     'labels_settings_platforms': '平台',
     'labels_settings_web': 'Web',
     'labels_settings_settingsHaveBeenSaved': '设置已保存',

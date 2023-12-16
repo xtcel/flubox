@@ -185,110 +185,120 @@ class _ProjectsPageState extends State<ProjectsPage> {
                             // circular: 10,
                             // padding: const EdgeInsets.all(20),
                             // color: const Color.fromRGBO(255, 255, 255, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: BorderSide(
+                                color: theme.dividerColor,
+                                width: 1,
+                              ),
+                            ),
                             child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(children: [
-                                    const Icon(Icons.folder),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      project.name ?? "",
-                                      style: theme.textTheme.titleMedium,
-                                    ),
-                                  ]),
-                                  _buildMoreButton(project)
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  const Divider(
-                                    height: 1,
-                                    thickness: 1.0,
-                                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        children: [
-                                          // Show In finder
-                                          IconButton(
-                                            iconSize: 24,
-                                            icon: Icon(
-                                              Icons.folder_open_rounded,
-                                              color: theme.primaryColor,
-                                            ),
-                                            onPressed: () {
-                                              // 打开文件夹
-                                              openPath(project
-                                                  .projectDir.absolute.path);
-                                            },
-                                          ),
-                                          // Open in IDE
-                                          IconButton(
-                                            iconSize: 24,
-                                            icon: Icon(
-                                              Icons.code_rounded,
-                                              color: theme.primaryColor,
-                                            ),
-                                            onPressed: () {
-                                              // 打开项目
-                                              openVsCode(project
-                                                  .projectDir.absolute.path);
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      PopupMenuButton<String>(
-                                        key: selectedVersionButtonKey,
-                                        onSelected: (String item) {
-                                          // 切换项目版本
-                                          checkVersion(project, item);
-                                        },
-                                        itemBuilder: (BuildContext context) {
-                                          return versions.map((version) {
-                                            return PopupMenuItem<String>(
-                                              value: version.name,
-                                              child: Text(version.name),
-                                            );
-                                          }).toList();
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              project.pinnedVersion != null
-                                                  ? "V${project.pinnedVersion}"
-                                                  : LocaleKeys
-                                                      .buttons_select_version
-                                                      .tr,
-                                              style: TextStyle(
-                                                  color: theme.primaryColor,
-                                                  fontSize: 14),
-                                            ),
-                                            Icon(
-                                              Icons.keyboard_arrow_down_rounded,
-                                              color: theme.primaryColor,
-                                              size: 24,
-                                            ),
-                                          ],
+                                      Row(children: [
+                                        const Icon(Icons.folder),
+                                        const SizedBox(
+                                          width: 5,
                                         ),
-                                      )
+                                        Text(
+                                          project.name ?? "",
+                                          style: theme.textTheme.titleMedium,
+                                        ),
+                                      ]),
+                                      _buildMoreButton(project)
                                     ],
                                   ),
+                                  Column(
+                                    children: [
+                                      const Divider(
+                                        height: 1,
+                                        thickness: 1.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              // Show In finder
+                                              IconButton(
+                                                iconSize: 24,
+                                                icon: Icon(
+                                                  Icons.folder_open_rounded,
+                                                  color: theme.primaryColor,
+                                                ),
+                                                onPressed: () {
+                                                  // 打开文件夹
+                                                  openPath(project.projectDir
+                                                      .absolute.path);
+                                                },
+                                              ),
+                                              // Open in IDE
+                                              IconButton(
+                                                iconSize: 24,
+                                                icon: Icon(
+                                                  Icons.code_rounded,
+                                                  color: theme.primaryColor,
+                                                ),
+                                                onPressed: () {
+                                                  // 打开项目
+                                                  openVsCode(project.projectDir
+                                                      .absolute.path);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          PopupMenuButton<String>(
+                                            key: selectedVersionButtonKey,
+                                            onSelected: (String item) {
+                                              // 切换项目版本
+                                              checkVersion(project, item);
+                                            },
+                                            itemBuilder:
+                                                (BuildContext context) {
+                                              return versions.map((version) {
+                                                return PopupMenuItem<String>(
+                                                  value: version.name,
+                                                  child: Text(version.name),
+                                                );
+                                              }).toList();
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  project.pinnedVersion != null
+                                                      ? "V${project.pinnedVersion}"
+                                                      : LocaleKeys
+                                                          .buttons_select_version
+                                                          .tr,
+                                                  style: TextStyle(
+                                                      color: theme.primaryColor,
+                                                      fontSize: 14),
+                                                ),
+                                                Icon(
+                                                  Icons
+                                                      .keyboard_arrow_down_rounded,
+                                                  color: theme.primaryColor,
+                                                  size: 24,
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
-                          ),
-                        )),
+                              ),
+                            )),
                       ));
                 }).toList()),
           ),

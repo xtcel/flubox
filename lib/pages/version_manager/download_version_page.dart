@@ -132,13 +132,6 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
                     Row(
                       children: [
                         Text(_filterReleases[index].version),
-                        // Container(
-                        //   margin: const EdgeInsets.only(left: 10),
-                        //   decoration: BoxDecoration(
-                        //       color: Colors.blue,
-                        //       borderRadius: BorderRadius.circular(10)),
-                        //   child: Text(_filterReleases[index].channel.name),
-                        // ),
                       ],
                     ),
                     getOperationWidget(_filterReleases[index])
@@ -150,50 +143,6 @@ class _DownloadVersionWidgetState extends State<DownloadVersionPage> {
               },
             ),
           ),
-          // TODO: 下载进度
-          // SliverAppBar(
-          //   pinned: true,
-          //   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          //   bottom: const PreferredSize(
-          //     preferredSize: Size.fromHeight(1),
-          //     child: Divider(height: 0),
-          //   ),
-          //   automaticallyImplyLeading: false,
-          //   // actions: [Container()],
-          //   title: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //       Row(
-          //         children: [
-          //           Heading(
-          //             context.i18n('modules:releases.versions'),
-          //           ),
-          //           const SizedBox(width: 10),
-          //           Chip(label: Text(versions.length.toString())),
-          //         ],
-          //       ),
-          //       DropdownButton<String>(
-          //         value: filter.state.name,
-          //         icon: const Icon(Icons.filter_list),
-          //         underline: Container(),
-          //         items: Filter.values.map((Filter filter) {
-          //           final text = filter != Filter.all
-          //               ? filter.name.capitalize()
-          //               : context.i18n('modules:releases.all');
-
-          //           return DropdownMenuItem(
-          //             value: filter.name,
-          //             child: Text(text),
-          //           );
-          //         }).toList(),
-          //         onChanged: (value) {
-          //           filter.state = filterFromName(value!);
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

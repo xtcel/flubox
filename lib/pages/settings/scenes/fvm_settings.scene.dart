@@ -25,13 +25,9 @@ class FvmSettingsScene extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20),
       child: ListView(
         children: [
-          // Text('FVM', style: Theme.of(context).textTheme.titleLarge),
-          // const SizedBox(height: 20),
           SwitchListTile(
             title: Text(
               LocaleKeys.labels_settings_skipSetupFlutterOnInstall.tr,
-              // context
-              //   .i18n('modules:settings.scenes.skipSetupFlutterOnInstall')
             ),
             subtitle: Text(
               LocaleKeys.labels_settings_thisWillOnlyCloneFlutterAndNotInstall
@@ -39,11 +35,6 @@ class FvmSettingsScene extends StatelessWidget {
                   LocaleKeys
                       .labels_settings_dependenciesAfterANewVersionIsInstalled
                       .tr,
-
-              // context.i18n(
-              //         'modules:settings.scenes.thisWillOnlyCloneFlutterAndNotInstall') +
-              //     context.i18n(
-              //         'modules:settings.scenes.dependenciesAfterANewVersionIsInstalled'),
             ),
             value: settings.fvm.skipSetup,
             onChanged: (value) {
