@@ -1,4 +1,4 @@
-[阅读中文版](https://github.com/THUDM/ChatGLM3/blob/main/README.md)
+[阅读中文版](https://github.com/xtcel/flubox/blob/master/how_to_configure_env.md)
 
 To speed up the access to the default Flutter pub repository and Github in China or other regions, it is recommended to use mirror sites and mirrors.
 

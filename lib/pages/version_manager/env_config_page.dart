@@ -193,8 +193,8 @@ class _EnvConfigPageState extends State<EnvConfigPage> {
               ),
               SizedBox(
                 width: 80,
-                child: getStatusWidget(
-                    flutterReleasesUrl, "https://pub.flutter-io.cn"),
+                child: getStatusWidget(flutterReleasesUrl,
+                    "https://storage.flutter-io.cn/flutter_infra_release/releases/releases_macos.json"),
               ),
             ],
           ),
@@ -228,8 +228,8 @@ class _EnvConfigPageState extends State<EnvConfigPage> {
               ),
               SizedBox(
                 width: 80,
-                child: getStatusWidget(
-                    flutterReleasesUrl, "https://pub.flutter-io.cn"),
+                child: getStatusWidget(flutterReleasesUrl,
+                    "https://gitee.com/mirrors/Flutter.git"),
               ),
             ],
           ),
@@ -244,7 +244,7 @@ class _EnvConfigPageState extends State<EnvConfigPage> {
                 onPressed: () {
                   // 使用默认浏览器打开链接
                   launch(
-                      "https://flutter.cn/docs/development/tools/sdk/release-notes/release-notes-2.2.3");
+                      "https://github.com/xtcel/flubox/blob/master/how_to_configure_env.md");
                 },
                 child: Text(
                   LocaleKeys.labels_how_to_configure.tr,

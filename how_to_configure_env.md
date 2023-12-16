@@ -1,4 +1,4 @@
-[Read this in English.](https://github.com/THUDM/ChatGLM3/blob/main/README_en.md)
+[Read this in English.](https://github.com/xtcel/flubox/blob/master/how_to_configure_env_en.md)
 
 为加快中国或者其他访问 Flutter pub 默认仓库和 Github 的速度，建议使用镜像站点和镜像。
 
