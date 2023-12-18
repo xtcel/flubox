@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Flex(
         direction: Axis.vertical,
         children: [
@@ -34,9 +34,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
             flex: 1,
             child: Container(),
           ),
-          const SizedBox(
-              child: Icon(Icons
-                  .logo_dev_rounded)), //Image.asset("assets/images/logo.png")),
+          SizedBox(child: Image.asset("assets/images/logo.png")),
           Expanded(
             flex: 2,
             child: Container(),
