@@ -8,7 +8,7 @@ create-dmg \
   --window-size 800 530 \
   --icon-size 130 \
   --text-size 14 \
-  --icon "Flubox.app" 260 250 \
+  --icon "Flubox.app" 250 250 \
   --hide-extension "Flubox.app" \
   --app-drop-link 540 250 \
   --hdiutil-quiet \
