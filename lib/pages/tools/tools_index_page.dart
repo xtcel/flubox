@@ -18,61 +18,59 @@ class ToolsIndexPage extends StatefulWidget {
 class _ToolsIndexPageState extends State<ToolsIndexPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 20,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(LocaleKeys.labels_tools.tr,
+                  style: Theme.of(context).textTheme.titleMedium),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ),
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            width: double.infinity,
+            child: Wrap(
+              spacing: 15,
+              runSpacing: 10,
               children: [
-                Text(LocaleKeys.labels_tools.tr,
-                    style: Theme.of(context).textTheme.titleMedium),
+                ToolsMenuItem(
+                  icon: Icons.av_timer,
+                  title: LocaleKeys.labels_unix_time_stamp.tr,
+                  summary: LocaleKeys.labels_unix_time_stmap_desc.tr,
+                  onTap: () {
+                    Get.toNamed(Routers.unixTimeConvertPage);
+                  },
+                ),
+                ToolsMenuItem(
+                  icon: MdiIcons.counter,
+                  title: LocaleKeys.labels_binary_convert.tr,
+                  summary: LocaleKeys.labels_binary_convert_desc.tr,
+                  onTap: () {
+                    Get.toNamed(Routers.binaryConvertPage);
+                  },
+                ),
+                // Flutter 图标库
+                ToolsMenuItem(
+                  icon: Icons.flutter_dash,
+                  title: LocaleKeys.labels_material_design_icons.tr,
+                  summary: LocaleKeys.labels_material_design_icons_desc.tr,
+                  onTap: () {
+                    Get.toNamed(Routers.flutterIconsPage);
+                  },
+                ),
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              width: double.infinity,
-              child: Wrap(
-                spacing: 15,
-                runSpacing: 10,
-                children: [
-                  ToolsMenuItem(
-                    icon: Icons.av_timer,
-                    title: LocaleKeys.labels_unix_time_stamp.tr,
-                    summary: LocaleKeys.labels_unix_time_stmap_desc.tr,
-                    onTap: () {
-                      Get.toNamed(Routers.unixTimeConvertPage);
-                    },
-                  ),
-                  ToolsMenuItem(
-                    icon: MdiIcons.counter,
-                    title: LocaleKeys.labels_binary_convert.tr,
-                    summary: LocaleKeys.labels_binary_convert_desc.tr,
-                    onTap: () {
-                      Get.toNamed(Routers.binaryConvertPage);
-                    },
-                  ),
-                  // Flutter 图标库
-                  ToolsMenuItem(
-                    icon: Icons.flutter_dash,
-                    title: LocaleKeys.labels_material_design_icons.tr,
-                    summary: LocaleKeys.labels_material_design_icons_desc.tr,
-                    onTap: () {
-                      Get.toNamed(Routers.flutterIconsPage);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

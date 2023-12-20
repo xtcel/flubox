@@ -63,8 +63,7 @@ class _VersionManagerState extends State<EnvironmentsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
@@ -98,7 +97,7 @@ class _VersionManagerState extends State<EnvironmentsPage>
           ),
         ],
       ),
-    ));
+    );
   }
 
   Widget _buildTopNavigationBar(int index) {

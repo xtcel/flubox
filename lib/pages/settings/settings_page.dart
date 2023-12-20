@@ -76,59 +76,55 @@ class _SettingsPageState extends State<SettingsPage>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text('设置', style: Theme.of(context).textTheme.titleMedium)
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 2.0,
-                  child: TabBar(
-                      tabs: tabs,
-                      controller: _tabController,
-                      isScrollable: false,
-                      automaticIndicatorColorAdjustment: false,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorColor: theme.primaryColor,
-                      labelColor: theme.primaryColor,
-                      unselectedLabelColor: theme.textTheme.titleMedium?.color,
-                      onTap: (index) {}),
-                ),
-              ],
-            ),
-            const Divider(
-              thickness: 1,
-              height: 1,
-            ),
-            GetBuilder<SettingsController>(builder: (controller) {
-              return Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    SettingsSectionGeneral(
-                        controller.state.settings, handleSave),
-                    FvmSettingsScene(controller.state.settings, handleSave),
-                    SettingsSectionFlutter(
-                        controller.state.settings, handleSave),
-                  ],
-                ),
-              );
-            }),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Text('设置', style: Theme.of(context).textTheme.titleMedium)
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 2.0,
+                child: TabBar(
+                    tabs: tabs,
+                    controller: _tabController,
+                    isScrollable: false,
+                    automaticIndicatorColorAdjustment: false,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: theme.primaryColor,
+                    labelColor: theme.primaryColor,
+                    unselectedLabelColor: theme.textTheme.titleMedium?.color,
+                    onTap: (index) {}),
+              ),
+            ],
+          ),
+          const Divider(
+            thickness: 1,
+            height: 1,
+          ),
+          GetBuilder<SettingsController>(builder: (controller) {
+            return Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  SettingsSectionGeneral(controller.state.settings, handleSave),
+                  FvmSettingsScene(controller.state.settings, handleSave),
+                  SettingsSectionFlutter(controller.state.settings, handleSave),
+                ],
+              ),
+            );
+          }),
+        ],
       ),
     );
   }

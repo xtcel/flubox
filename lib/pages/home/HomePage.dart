@@ -129,9 +129,13 @@ class LeftNavigation extends StatelessWidget {
         padding: EdgeInsets.only(top: 40, bottom: 20.0),
         child: Column(
           children: [
-            FlutterLogo(),
+            Image(
+              image: AssetImage("assets/images/logo.png"),
+              width: 50,
+              height: 50,
+            ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Text("FluBox")
           ],

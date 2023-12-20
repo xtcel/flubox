@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreenPage> {
     super.initState();
 
     // 跳转到首页
-    Future.delayed(const Duration(milliseconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       Get.toNamed(Routers.root);
     });
   }
@@ -35,8 +35,9 @@ class _SplashScreenState extends State<SplashScreenPage> {
             child: Container(),
           ),
           SizedBox(child: Image.asset("assets/images/logo.png")),
+          Text("FluBox", style: Theme.of(context).textTheme.titleLarge),
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(),
           ),
         ],

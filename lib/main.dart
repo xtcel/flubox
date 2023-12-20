@@ -41,18 +41,12 @@ void realRunApp() async {
   await GetStorage.init();
   await windowManager.ensureInitialized();
 
+  final kEnvVars = Platform.environment;
+
+  print("kEnvVars: $kEnvVars");
+  print("Home: ${kEnvVars["HOME"]}");
+
   final Directory hiveDir = await getApplicationSupportDirectory();
-  // List<String> paths = hiveDir.path.split('/');
-  // paths.removeLast();
-  // final Directory appDir = Directory('${paths.join('/')}/com.fvm.sidekick');
-
-  // const projects_key = 'projects_service_box';
-
-  /// copy sidekick hive db to hiveDir
-  // final File sidekickHiveDb = File('${appDir.path}/$projects_key.hive');
-  // if (!sidekickHiveDb.existsSync()) {
-  //   sidekickHiveDb.copySync('${hiveDir.path}/$projects_key.hive');
-  // }
 
   Hive.init(hiveDir.absolute.path);
 
