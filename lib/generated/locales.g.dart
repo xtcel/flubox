@@ -66,6 +66,12 @@ class LocaleKeys {
   static const labels_stable = 'labels_stable';
   static const labels_beta = 'labels_beta';
   static const labels_dev = 'labels_dev';
+  static const labels_no_projects_yet = 'labels_no_projects_yet';
+  static const labels_no_projects_yet_desc = 'labels_no_projects_yet_desc';
+  static const labels_no_versions_installed_yet =
+      'labels_no_versions_installed_yet';
+  static const labels_no_versions_installed_yet_desc =
+      'labels_no_versions_installed_yet_desc';
   static const labels_settings_general = 'labels_settings_general';
   static const labels_settings_fvm = 'labels_settings_fvm';
   static const labels_settings_flutter = 'labels_settings_flutter';
@@ -175,6 +181,10 @@ class Locales {
     'labels_stable': '稳定版',
     'labels_beta': '测试版',
     'labels_dev': '开发版',
+    'labels_no_projects_yet': '还没有项目',
+    'labels_no_projects_yet_desc': '点击 + 按钮导入你的第一个项目',
+    'labels_no_versions_installed_yet': '尚未安装任何版本',
+    'labels_no_versions_installed_yet_desc': '安装 FVM 并下载版本',
     'labels_settings_general': '通用',
     'labels_settings_fvm': 'FVM',
     'labels_settings_flutter': 'Flutter',
@@ -276,6 +286,11 @@ class Locales {
     'labels_stable': 'Stable',
     'labels_beta': 'Beta',
     'labels_dev': 'Dev',
+    'labels_no_projects_yet': 'No projects yet',
+    'labels_no_projects_yet_desc':
+        'Tap the + button to import your first project',
+    'labels_no_versions_installed_yet': 'No versions installed yet',
+    'labels_no_versions_installed_yet_desc': 'Install FVM and download version',
     'labels_settings_general': 'General',
     'labels_settings_fvm': 'FVM',
     'labels_settings_flutter': 'Flutter',

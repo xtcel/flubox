@@ -5,6 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';
 
+import 'widgets/versions_empty.dart';
+
 /// 切换版本页面
 class CheckVersionPage extends StatefulWidget {
   const CheckVersionPage({super.key});
@@ -17,6 +19,8 @@ class _CheckVersionPageState extends State<CheckVersionPage> {
   String currentVersion = "";
   CacheVersion? globalVersion;
   List<CacheVersion> versions = [];
+  bool loaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +35,9 @@ class _CheckVersionPageState extends State<CheckVersionPage> {
     versions = await FVMClient.getCachedVersions();
     print("cached versions :$versions");
 
-    setState(() {});
+    setState(() {
+      loaded = true;
+    });
   }
 
   @override
@@ -47,7 +53,6 @@ class _CheckVersionPageState extends State<CheckVersionPage> {
         child: Column(
           children: [
             Container(
-              // padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.only(bottom: 15),
               child: Row(
                 children: [
@@ -60,79 +65,82 @@ class _CheckVersionPageState extends State<CheckVersionPage> {
             ),
             Expanded(
               child: Container(
-                child: ListView.separated(
-                  itemCount: versions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 60,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    versions[index].name,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                  // 是否是当前版本
-                                  Visibility(
-                                      visible: globalVersion != null
-                                          ? versions[index]
-                                                  .compareTo(globalVersion!) ==
-                                              0
-                                          : false,
-                                      child: globalVersionWidget())
-                                ],
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          PopupMenuButton(
-                            itemBuilder: (BuildContext context) {
-                              return <PopupMenuEntry<String>>[
-                                PopupMenuItem(
-                                  value: "setAsGlobal",
-                                  child: Text(
-                                    LocaleKeys.buttons_setAsGlobal.tr,
-                                  ),
+                child: versions.isEmpty && loaded
+                    ? const VersionsEmpty()
+                    : ListView.separated(
+                        itemCount: versions.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: 60,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          versions[index].name,
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        // 是否是当前版本
+                                        Visibility(
+                                            visible: globalVersion != null
+                                                ? versions[index].compareTo(
+                                                        globalVersion!) ==
+                                                    0
+                                                : false,
+                                            child: globalVersionWidget())
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                PopupMenuItem(
-                                  value: "remove",
-                                  child: Text(
-                                    LocaleKeys.buttons_remove.tr,
-                                  ),
+                                Expanded(
+                                  child: Container(),
                                 ),
-                              ];
-                            },
-                            onSelected: (String value) async {
-                              if (value == "setAsGlobal") {
-                                // 切换版本
-                                await FVMClient.setGlobalVersion(
-                                    versions[index]);
-                                getFlutterReleases();
-                              } else if (value == "remove") {
-                                EasyLoading.show(
-                                    status: LocaleKeys.tips_removing.tr);
-                                await FVMClient.remove(versions[index].name);
-                                getFlutterReleases();
-                                EasyLoading.dismiss();
-                              }
-                            },
-                            child: const Icon(Icons.more_vert_rounded),
-                          ),
-                        ],
+                                PopupMenuButton(
+                                  itemBuilder: (BuildContext context) {
+                                    return <PopupMenuEntry<String>>[
+                                      PopupMenuItem(
+                                        value: "setAsGlobal",
+                                        child: Text(
+                                          LocaleKeys.buttons_setAsGlobal.tr,
+                                        ),
+                                      ),
+                                      PopupMenuItem(
+                                        value: "remove",
+                                        child: Text(
+                                          LocaleKeys.buttons_remove.tr,
+                                        ),
+                                      ),
+                                    ];
+                                  },
+                                  onSelected: (String value) async {
+                                    if (value == "setAsGlobal") {
+                                      // 切换版本
+                                      await FVMClient.setGlobalVersion(
+                                          versions[index]);
+                                      getFlutterReleases();
+                                    } else if (value == "remove") {
+                                      EasyLoading.show(
+                                          status: LocaleKeys.tips_removing.tr);
+                                      await FVMClient.remove(
+                                          versions[index].name);
+                                      getFlutterReleases();
+                                      EasyLoading.dismiss();
+                                    }
+                                  },
+                                  child: const Icon(Icons.more_vert_rounded),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const Divider();
+                        },
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider();
-                  },
-                ),
               ),
             ),
           ],

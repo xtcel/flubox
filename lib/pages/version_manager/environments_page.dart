@@ -25,13 +25,13 @@ class _VersionManagerState extends State<EnvironmentsPage>
 
   final List<Tab> tabs = <Tab>[
     Tab(
-      text: LocaleKeys.labels_env_variables.tr,
-    ),
-    Tab(
       text: LocaleKeys.labels_switch_version.tr,
     ),
     Tab(
       text: LocaleKeys.labels_donwload_version.tr,
+    ),
+    Tab(
+      text: LocaleKeys.labels_env_variables.tr,
     ),
   ];
 
@@ -89,9 +89,9 @@ class _VersionManagerState extends State<EnvironmentsPage>
             child: TabBarView(
               controller: _tabController,
               children: const [
-                EnvConfigPage(),
                 CheckVersionPage(),
                 DownloadVersionPage(),
+                EnvConfigPage(),
               ],
             ),
           ),

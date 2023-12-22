@@ -56,6 +56,10 @@
     "stable": "稳定版",
     "beta": "测试版",
     "dev": "开发版",
+    "no_projects_yet": "还没有项目",
+    "no_projects_yet_desc": "点击 + 按钮导入你的第一个项目",
+    "no_versions_installed_yet": "尚未安装任何版本",
+    "no_versions_installed_yet_desc": "安装 FVM 并下载版本",
     "settings": {
       "general": "通用",
       "fvm": "FVM",

@@ -56,6 +56,10 @@
     "stable": "Stable",
     "beta": "Beta",
     "dev": "Dev",
+    "no_projects_yet": "No projects yet",
+    "no_projects_yet_desc": "Tap the + button to import your first project",
+    "no_versions_installed_yet": "No versions installed yet",
+    "no_versions_installed_yet_desc": "Install FVM and download version",
     "settings": {
       "general": "General",
       "fvm": "FVM",

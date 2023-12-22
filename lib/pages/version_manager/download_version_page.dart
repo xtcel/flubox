@@ -5,6 +5,7 @@ import 'package:fvm/fvm.dart';
 import 'package:get/get.dart';
 
 import '../../generated/locales.g.dart';
+import 'widgets/versions_empty.dart';
 
 /// 版本下载组件
 
