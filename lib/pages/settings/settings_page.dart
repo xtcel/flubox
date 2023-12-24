@@ -86,7 +86,8 @@ class _SettingsPageState extends State<SettingsPage>
           ),
           Row(
             children: [
-              Text('设置', style: Theme.of(context).textTheme.titleMedium)
+              Text(LocaleKeys.buttons_settings,
+                  style: Theme.of(context).textTheme.titleMedium)
             ],
           ),
           const SizedBox(height: 20),
