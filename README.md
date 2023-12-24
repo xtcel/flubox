@@ -30,3 +30,4 @@ Whether you're a beginner or an experienced Flutter developer, Flubox is your po
 
 ## Download
 
+[Download latest](https://github.com/xtcel/flubox/releases/latest)
