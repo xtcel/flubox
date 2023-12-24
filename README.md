@@ -1,18 +1,32 @@
-# Flubox - Flutter开发工具助手
+<p align="left"><img src="/assets/images/logo.png" alt="flubox" width="64"></p>
 
-Flubox是一款专为Flutter开发者设计的强大工具助手，为你的Flutter开发体验提供全方位支持。通过Flubox，你可以轻松管理Flutter版本，利用FVM（Flutter Version Management）系统，确保你的项目能够无缝适配最新的Flutter框架。除此之外，Flubox还提供一系列实用的开发小工具，帮助你更高效地构建出色的Flutter应用。
+# Flubox 
 
-## 主要功能
+### Make Flutter development easier and more efficient
 
-1. **Flutter版本管理：** 利用FVM，Flubox允许你在不同的项目中轻松切换Flutter版本。无论是维护旧项目还是尝试新特性，Flubox都能满足你的需求。
+[中文](README_zh.md)
 
-2. **便捷项目管理：** Flubox帮助你快速创建、导入和管理Flutter项目。通过直观的界面，你可以轻松切换项目、查看依赖关系，以及管理插件。
+## About
 
-3. **实用开发工具：** Flubox集成了一系列实用的开发小工具，包括代码生成器、调试辅助工具等，提高你的开发效率。
+Flubox is a powerful tool assistant designed specifically for Flutter developers, providing comprehensive support for your Flutter development experience. With Flubox, you can easily manage Flutter versions (using FVM) and use different versions of Flutter in different projects. In addition, Flubox provides a range of practical development tools to help you build outstanding Flutter applications more efficiently.
 
-4. **插件管理：** Flubox支持简便的插件管理，让你可以轻松引入第三方库，并确保它们与你的项目兼容。
+## Screenshots
 
-5. **持续更新与支持：** Flubox会定期更新以支持最新的Flutter版本和相关工具，确保你能够始终保持在Flutter生态系统的最前沿。
+<img src="https://s2.loli.net/2023/12/24/cdRXBuzkGTpayhs.png" alt="screenshot" height="300"/>
 
-无论你是Flutter初学者还是经验丰富的开发者，Flubox都是你提升开发效率、管理项目的得力助手。下载Flubox，让Flutter开发更加轻松、高效！
+## Features
+
+1. **Flutter Version Management:** With FVM, Flubox allows you to easily switch between Flutter versions in different projects. Whether you're maintaining old projects or trying out new features, Flubox can meet your needs.
+
+2. **Convenient Project Management:** Flubox helps you quickly create, import, and manage Flutter projects. With an intuitive interface, you can easily switch project Flutter versions.
+
+3. **Useful Development Tools:** Flubox integrates a range of practical development tools, including code generators, debugging aids, and more, to improve your development efficiency.
+
+4. **Useful Development Tools:** Flubox integrates a range of practical development tools, including timestamp and base conversion tools, to improve your development efficiency.
+
+5. **Continuous Updates and Support:** Flubox is regularly updated to support the latest Flutter versions and related tools, ensuring that you stay at the forefront of the Flutter ecosystem.
+
+Whether you're a beginner or an experienced Flutter developer, Flubox is your powerful assistant for improving development efficiency and managing projects. Download Flubox and make Flutter development easier and more efficient!
+
+## Download
 
