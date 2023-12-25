@@ -26,3 +26,4 @@ Flubox是一款专为Flutter开发者设计的强大工具助手，为你的Flut
 
 ## 下载
 
+[下载最新版本](https://github.com/xtcel/flubox/releases/latest)
