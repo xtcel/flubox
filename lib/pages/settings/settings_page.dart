@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage>
 
   TabController? _tabController;
 
-  final List<Tab> tabs = <Tab>[
+  List<Tab> tabs = <Tab>[
     Tab(
       text: LocaleKeys.labels_settings_general.tr,
     ),
@@ -86,7 +86,7 @@ class _SettingsPageState extends State<SettingsPage>
           ),
           Row(
             children: [
-              Text(LocaleKeys.buttons_settings,
+              Text(LocaleKeys.buttons_settings.tr,
                   style: Theme.of(context).textTheme.titleMedium)
             ],
           ),
