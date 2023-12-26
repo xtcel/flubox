@@ -81,9 +81,6 @@ class _SettingsPageState extends State<SettingsPage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
           Row(
             children: [
               Text(LocaleKeys.buttons_settings.tr,

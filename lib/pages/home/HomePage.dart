@@ -9,6 +9,7 @@ import '../settings/settings_page.dart';
 import '../tools/tools_index_page.dart';
 import '../version_manager/environments_page.dart';
 import 'widgets/app_bottom_bar.dart';
+import 'widgets/app_nav_bar.dart';
 
 /// 首页
 
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: const AppNavBar(),
         bottomNavigationBar: const AppBottomBar(),
         body: Row(children: [
           ValueListenableBuilder<int>(
@@ -126,7 +128,7 @@ class LeftNavigation extends StatelessWidget {
     return const Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: EdgeInsets.only(top: 40, bottom: 20.0),
+        padding: EdgeInsets.only(top: 10, bottom: 20.0),
         child: Column(
           children: [
             Image(

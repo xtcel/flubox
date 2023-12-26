@@ -15,6 +15,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 
 import 'generated/locales.g.dart';
 import 'pages/projects/project.dto.dart';
@@ -65,18 +66,6 @@ void realRunApp() async {
     exit(0);
   }
 
-  WindowOptions windowOptions = const WindowOptions(
-    size: Size(1000, 720),
-    center: true,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.hidden,
-  );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show();
-    await windowManager.focus();
-  });
-
   PackageInfoUtil.getInstance();
 
   if (kDebugMode) {
@@ -99,6 +88,33 @@ void realRunApp() async {
   } else {
     runApp(const MyApp());
   }
+
+  WindowOptions windowOptions = const WindowOptions(
+    size: Size(1000, 720),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+  );
+
+  const initialSize = Size(1000, 720);
+  windowManager.setMinimumSize(initialSize);
+  windowManager.setSize(initialSize);
+  windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+  windowManager.setSkipTaskbar(false);
+  if (!Platform.isMacOS) windowManager.setAsFrameless();
+
+  doWhenWindowReady(() {
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
+
+  // windowManager.waitUntilReadyToShow(windowOptions, () async {
+  //   await windowManager.show();
+  //   await windowManager.focus();
+  // });
 }
 
 class MyApp extends StatelessWidget {

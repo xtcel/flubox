@@ -20,9 +20,6 @@ class _ToolsIndexPageState extends State<ToolsIndexPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 20,
-        ),
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Row(
