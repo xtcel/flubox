@@ -100,15 +100,17 @@ void realRunApp() async {
   const initialSize = Size(1000, 720);
   windowManager.setMinimumSize(initialSize);
   windowManager.setSize(initialSize);
-  windowManager.setTitleBarStyle(TitleBarStyle.hidden);
-  windowManager.setSkipTaskbar(false);
+  // windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+  // windowManager.setSkipTaskbar(false);
   if (!Platform.isMacOS) windowManager.setAsFrameless();
 
+  appWindow.show();
   doWhenWindowReady(() {
-    appWindow.minSize = initialSize;
-    appWindow.size = initialSize;
-    appWindow.alignment = Alignment.center;
-    appWindow.show();
+    final win = appWindow;
+    win.minSize = initialSize;
+    win.size = initialSize;
+    win.alignment = Alignment.center;
+    win.show();
   });
 
   // windowManager.waitUntilReadyToShow(windowOptions, () async {

@@ -66,7 +66,7 @@ dependencies:
   package_info_plus: ^4.2.0
   async: ^2.11.0
   # 定制桌面端窗口的插件
-  bitsdojo_window: ^0.1.6
+  bitsdojo_window: ^0.1.5
 
 dev_dependencies:
   flutter_test:

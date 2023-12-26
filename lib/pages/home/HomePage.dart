@@ -41,6 +41,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: const AppNavBar(),
         bottomNavigationBar: const AppBottomBar(),
+        extendBody: true,
+        extendBodyBehindAppBar: true,
         body: Row(children: [
           ValueListenableBuilder<int>(
             valueListenable: _selectIndex,

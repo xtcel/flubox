@@ -1,19 +1,22 @@
 import 'dart:io';
 
-import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart'
+    hide MinimizeWindowButton, MaximizeWindowButton, RestoreWindowButton;
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AppNavBar extends StatelessWidget implements PreferredSizeWidget {
   /// Constructor
   const AppNavBar({key}) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(35);
+  Size get preferredSize => const Size.fromHeight(32);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: null,
+      backgroundColor: Colors.transparent,
       centerTitle: Platform.isWindows ? false : true,
       titleSpacing: 0,
       leading: Platform.isMacOS ? const WindowButtons() : null,
@@ -73,22 +76,9 @@ class WindowButtons extends StatelessWidget {
     );
     return Row(
       children: [
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(8),
-            bottomLeft: Radius.circular(8),
-          ),
-          child: MinimizeWindowButton(colors: buttonColors, animate: true),
-        ),
+        MinimizeWindowButton(colors: buttonColors, animate: true),
         MaximizeWindowButton(colors: buttonColors, animate: true),
-        ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(8),
-            bottomRight: Radius.circular(8),
-          ),
-          child: CloseWindowButton(colors: closeButtonColors, animate: true),
-        ),
-        const SizedBox(width: 8),
+        CloseWindowButton(colors: closeButtonColors, animate: true),
       ],
     );
   }
@@ -143,4 +133,52 @@ class RightSide extends StatelessWidget {
               ])),
             ])));
   }
+}
+
+class MinimizeWindowButton extends WindowButton {
+  MinimizeWindowButton(
+      {Key? key,
+      WindowButtonColors? colors,
+      VoidCallback? onPressed,
+      bool? animate})
+      : super(
+            key: key,
+            colors: colors,
+            animate: animate ?? false,
+            padding: EdgeInsets.zero,
+            iconBuilder: (buttonContext) =>
+                MinimizeIcon(color: buttonContext.iconColor),
+            onPressed: onPressed ?? () => appWindow.minimize());
+}
+
+class MaximizeWindowButton extends WindowButton {
+  MaximizeWindowButton(
+      {Key? key,
+      WindowButtonColors? colors,
+      VoidCallback? onPressed,
+      bool? animate})
+      : super(
+            key: key,
+            colors: colors,
+            animate: animate ?? false,
+            padding: EdgeInsets.zero,
+            iconBuilder: (buttonContext) =>
+                MaximizeIcon(color: buttonContext.iconColor),
+            onPressed: onPressed ?? () => appWindow.maximizeOrRestore());
+}
+
+class RestoreWindowButton extends WindowButton {
+  RestoreWindowButton(
+      {Key? key,
+      WindowButtonColors? colors,
+      VoidCallback? onPressed,
+      bool? animate})
+      : super(
+            key: key,
+            colors: colors,
+            animate: animate ?? false,
+            padding: EdgeInsets.zero,
+            iconBuilder: (buttonContext) =>
+                RestoreIcon(color: buttonContext.iconColor),
+            onPressed: onPressed ?? () => appWindow.maximizeOrRestore());
 }
