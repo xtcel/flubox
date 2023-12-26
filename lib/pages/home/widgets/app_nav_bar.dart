@@ -10,7 +10,7 @@ class AppNavBar extends StatelessWidget implements PreferredSizeWidget {
   const AppNavBar({key}) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(32);
+  Size get preferredSize => const Size.fromHeight(35);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,9 @@ class WindowButtons extends StatelessWidget {
     return Row(
       children: [
         MinimizeWindowButton(colors: buttonColors, animate: true),
-        MaximizeWindowButton(colors: buttonColors, animate: true),
+        appWindow.isMaximized
+            ? RestoreWindowButton(colors: buttonColors, animate: true)
+            : MaximizeWindowButton(colors: buttonColors, animate: true),
         CloseWindowButton(colors: closeButtonColors, animate: true),
       ],
     );
