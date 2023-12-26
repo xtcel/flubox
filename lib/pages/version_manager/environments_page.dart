@@ -67,9 +67,6 @@ class _VersionManagerState extends State<EnvironmentsPage>
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          const SizedBox(
-            height: 20,
-          ),
           Row(
             children: [
               Text(LocaleKeys.labels_environments.tr,

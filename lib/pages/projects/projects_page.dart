@@ -76,9 +76,6 @@ class _ProjectsPageState extends State<ProjectsPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 20,
-          ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(
